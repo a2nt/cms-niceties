@@ -1,5 +1,5 @@
 ---
-Name: webapp-env-check
+Name: a2nt-cms-niceties-env-check
 ---
 
 SilverStripe\EnvironmentCheck\EnvironmentCheckSuite:

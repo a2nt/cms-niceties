@@ -1,5 +1,5 @@
 ---
-Name: webapp-base-config
+Name: a2nt-cms-niceties-base-config
 ---
 SilverStripe\Core\Manifest\ModuleManifest:
   project: app

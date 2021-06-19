@@ -1,9 +1,9 @@
 ---
-Name: webapp-locale-fluent
+Name: a2nt-cms-niceties-locale-fluent
 After:
-  - webapp-extensions
-  - webapp-elemental
-  - webapp-locale
+  - a2nt-cms-niceties-extensions
+  - a2nt-cms-niceties-elemental
+  - a2nt-cms-niceties-locale
 ---
 # Define Fluent locales
 TractorCow\Fluent\Model\Locale:

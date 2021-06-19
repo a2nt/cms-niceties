@@ -1,5 +1,5 @@
 ---
-Name: webapp-base-extensions
+Name: a2nt-cms-niceties-base-extensions
 ---
 # Basic extensions
 SilverStripe\Admin\LeftAndMain:

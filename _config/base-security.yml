@@ -1,5 +1,5 @@
 ---
-Name: 'webapp-base-security'
+Name: 'a2nt-cms-niceties-base-security'
 After: 'framework/*, cms/*, security_baseline'
 ---
 SilverStripe\Core\Injector\Injector:

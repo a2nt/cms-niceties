@@ -1,10 +1,11 @@
 ---
-Name: webapp-options-elements
+Name: a2nt-cms-niceties-options-elements
 After:
   - elemental
   - elemental-list
   - elementalvirtual
-  - webapp-base-extensions
+  - elemental-basics
+  - a2nt-cms-niceties-base-extensions
 ---
 Page:
   searchable_elements:

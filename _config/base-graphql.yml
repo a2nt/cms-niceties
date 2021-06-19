@@ -1,5 +1,5 @@
 ---
-Name: webapp-base-graphql
+Name: a2nt-cms-niceties-base-graphql
 After: graphqlconfig
 ---
 SilverStripe\Control\Director:

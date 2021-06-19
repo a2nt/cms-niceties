@@ -1,7 +1,7 @@
 ---
-Name: webapp-templates-requirements
+Name: a2nt-cms-niceties-templates-requirements
 ---
-App\Templates\DeferredRequirements:
+A2nt\CMSNiceties\Templates\DeferredRequirements:
   nofontawesome: false
   version: false
   static_domain: false

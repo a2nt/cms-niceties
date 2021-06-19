@@ -1,5 +1,5 @@
 ---
-Name: webapp-base-mimeuploadvalidator
+Name: a2nt-cms-niceties-base-mimeuploadvalidator
 After: '#mimeuploadvalidator'
 Only:
   moduleexists: 'silverstripe/mimevalidator'

@@ -1,5 +1,5 @@
 ---
-Name: 'webapp-debugbar'
+Name: 'a2nt-cms-niceties-debugbar'
 After:
   - 'framework'
   - 'debugbar'

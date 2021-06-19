@@ -1,5 +1,5 @@
 ---
-Name: webapp-base-files
+Name: a2nt-cms-niceties-base-files
 ---
 SilverStripe\Blog\Model\BlogPost:
     featured_images_directory: 'blog-posts'

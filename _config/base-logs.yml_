@@ -1,5 +1,5 @@
 ---
-Name: webapp-base-logs-dev
+Name: a2nt-cms-niceties-base-logs-dev
 Only:
   environment: dev
 ---
@@ -15,7 +15,7 @@ SilverStripe\Core\Injector\Injector:
       Formatter: '%$SilverStripe\Logging\DetailedErrorFormatter'
       CLIFormatter: '%$SilverStripe\Logging\DetailedErrorFormatter'
 ---
-Name: webapp-base-logs-live
+Name: a2nt-cms-niceties-base-logs-live
 Except:
   environment: dev
 ---
