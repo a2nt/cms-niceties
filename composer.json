@@ -1,0 +1,27 @@
+{
+    "name": "a2nt/cms-niceties",
+    "description": "Some useful CMS updates",
+    "type": "silverstripe-vendormodule",
+    "keywords": [
+        "silverstripe",
+        "elemental"
+    ],
+    "license": "BSD-3-Clause",
+    "authors": [{
+        "name": "Tony Air",
+        "email": "tony@twma.pro"
+    }],
+    "minimum-stability": "dev",
+    "require": {
+        "silverstripe/cms": "^4",
+        "a2nt/silverstripe-elemental-basics": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "autoload": {
+        "psr-4": {
+            "A2nt\\ElementalBasics\\": "src/"
+        }
+    }
+}

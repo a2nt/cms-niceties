@@ -1,0 +1,47 @@
+---
+Name: webapp-base-extensions
+---
+# Basic extensions
+SilverStripe\Admin\LeftAndMain:
+  extensions:
+    - A2nt\CMSNiceties\Extensions\LeftAndMainExtension
+
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - A2nt\CMSNiceties\Extensions\SocialExtension
+    - A2nt\CMSNiceties\Extensions\SiteConfigExtension
+    - A2nt\CMSNiceties\Extensions\NotificationsExtension
+
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    - A2nt\CMSNiceties\Extensions\SiteTreeExtension
+
+Sheadawson\Linkable\Models\EmbeddedObject:
+  extensions:
+    - A2nt\CMSNiceties\Extensions\EmbeddedObjectExtension
+
+SilverStripe\Assets:
+  extensions:
+    - A2nt\CMSNiceties\Extensions\ImageExtension
+
+Dynamic\FlexSlider\Model\SlideImage:
+  extensions:
+    - A2nt\CMSNiceties\Extensions\SlideImageExtension
+
+SilverStripe\Core\Injector\Injector:
+  #SilverStripe\UserForms\Model\UserDefinedForm:
+  #  class: A2nt\CMSNiceties\Extensions\UserDefinedForm_HiddenClass
+  Sheadawson\Linkable\Forms\EmbeddedObjectField:
+    class: A2nt\CMSNiceties\Extensions\EmbedObjectField
+  SilverStripe\Forms\CompositeField:
+    class: A2nt\CMSNiceties\Extensions\CompositeFieldExtension
+
+SilverStripe\UserForms\Form\UserForm:
+  extensions:
+    - A2nt\CMSNiceties\Extensions\PlaceholderFormExtension
+
+Page:
+  searchable_objects:
+    - A2nt\CMSNiceties\Models\TeamMember
+  extensions:
+    - DNADesign\Elemental\Extensions\ElementalPageExtension
