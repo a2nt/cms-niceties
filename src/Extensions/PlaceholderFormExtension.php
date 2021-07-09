@@ -19,12 +19,15 @@ class PlaceholderFormExtension extends Extension
     private function setPlaceholder($field)
     {
         if (is_a($field, TextField::class)) {
-            $field->setAttribute(
-                'placeholder',
-                $field->Title()
-                .($field->hasClass('requiredField') ? '*' : '')
-            );
-            $field->setTitle('');
+            if (!$field->getAttribute('placeholder')) {
+                $placeholder = $field->Title() .($field->hasClass('requiredField') ? '*' : '');
+
+                $field->setAttribute(
+                    'placeholder',
+                    $placeholder
+                );
+                $field->setTitle('');
+            }
         }
 
         if (is_a($field, CompositeField::class)) {
