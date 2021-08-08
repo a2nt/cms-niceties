@@ -175,7 +175,10 @@ class DeferredRequirements implements TemplateGlobalProvider
         $result = '';
         self::$css = array_unique(self::$css);
         foreach (self::$css as $css) {
+            $url = self::get_url($css);
             $result .= '<i class="defer-cs" data-load="' . self::get_url($css) . '"></i>';
+            //$result .= '<link rel="preload" href="'.$url.'" as="style" onload="this.rel=\'stylesheet\'">';
+            $result .= '<noscript><link rel="stylesheet" href="'.$url.'"></noscript>';
         }
 
         self::$js = array_unique(self::$js);
