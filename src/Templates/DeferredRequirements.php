@@ -85,7 +85,6 @@ class DeferredRequirements implements TemplateGlobalProvider
             $v = !isset($config['fontawesome_version']) || !$config['fontawesome_version']
                 ? Config::inst()->get(FontAwesomeField::class, 'version')
                 : $config['fontawesome_version'];
-
             self::loadJS('//use.fontawesome.com/releases/v'.$v.'/js/all.js');
         }
 
@@ -136,7 +135,7 @@ class DeferredRequirements implements TemplateGlobalProvider
     public static function loadCSS($css): void
     {
         $external = (mb_strpos($css, '//') === 0 || mb_strpos($css, 'http') === 0);
-        if ($external) {
+        if (self::getDeferred() && !self::webpackActive()) {
             self::$css[] = $css;
         } else {
             WebpackTemplateProvider::loadCSS($css);
