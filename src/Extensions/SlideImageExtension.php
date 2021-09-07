@@ -9,6 +9,7 @@
 
 namespace A2nt\CMSNiceties\Extensions;
 
+use A2nt\ElementalBasics\Elements\SliderElement;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\DatetimeField;
 use SilverStripe\Forms\FieldList;
@@ -37,12 +38,20 @@ class SlideImageExtension extends DataExtension
     public function getSlideWidth()
     {
         $element = $this->getElement();
+        if(!$element->ID) {
+        	return SliderElement::config()->get('slide_width');
+        }
+
         return $element->getSlideWidth();
     }
 
     public function getSlideHeight()
     {
         $element = $this->getElement();
+        if(!$element->ID) {
+        	return SliderElement::config()->get('slide_height');
+        }
+
         return $element->getSlideHeight();
     }
 
