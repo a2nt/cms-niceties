@@ -85,6 +85,8 @@ class DeferredRequirements implements TemplateGlobalProvider
             $v = !isset($config['fontawesome_version']) || !$config['fontawesome_version']
                 ? Config::inst()->get(FontAwesomeField::class, 'version')
                 : $config['fontawesome_version'];
+
+            Requirements::customScript('FontAwesomeConfig={searchPseudoElements:true}');
             self::loadJS('//use.fontawesome.com/releases/v'.$v.'/js/all.js');
         }
 
