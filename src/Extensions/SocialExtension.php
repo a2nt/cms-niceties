@@ -36,11 +36,11 @@ class SocialExtension extends DataExtension
         parent::updateCMSFields($fields);
 
         $linkFields = [
-            LinkField::create('FacebookID'),
-            LinkField::create('LinkedInID'),
-            LinkField::create('PinterestID'),
-            LinkField::create('InstagramID'),
-            LinkField::create('TwitterID'),
+            LinkField::create('FacebookID', 'Facebook'),
+            LinkField::create('LinkedInID', 'LinkedIn'),
+            LinkField::create('PinterestID', 'Pinterest'),
+            LinkField::create('InstagramID', 'Instagram'),
+            LinkField::create('TwitterID', 'Twitter'),
         ];
 
         foreach ($linkFields as $field) {
