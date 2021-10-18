@@ -27,6 +27,7 @@ class SocialExtension extends DataExtension
         'Pinterest' => Link::class,
         'Instagram' => Link::class,
         'Twitter' => Link::class,
+        'YouTube' => Link::class,
         'PublicEmail' => Link::class,
         'PhoneNumber' => Link::class,
     ];
@@ -41,6 +42,7 @@ class SocialExtension extends DataExtension
             LinkField::create('PinterestID', 'Pinterest'),
             LinkField::create('InstagramID', 'Instagram'),
             LinkField::create('TwitterID', 'Twitter'),
+            LinkField::create('YouTubeID', 'YouTube'),
         ];
 
         foreach ($linkFields as $field) {
