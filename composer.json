@@ -15,7 +15,8 @@
     "require": {
         "silverstripe/cms": "^4",
         "a2nt/silverstripe-elemental-basics": "*",
-        "silverstripe/widgets": "^2.0"
+        "silverstripe/widgets": "*",
+        "drmartingonzo/ss-tinymce-charcount": "*"
     },
     "autoload": {
         "psr-4": {
