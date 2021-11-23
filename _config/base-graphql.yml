@@ -1,6 +1,9 @@
 ---
 Name: a2nt-cms-niceties-base-graphql
 After: graphqlconfig
+Only:
+  moduleexists:
+    - 'silverstripe/graphql'
 ---
 SilverStripe\Control\Director:
   rules:
