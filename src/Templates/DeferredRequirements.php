@@ -22,6 +22,7 @@ class DeferredRequirements implements TemplateGlobalProvider
     private static $nojquery = false;
     private static $jquery_version = '3.4.1';
     private static $nofontawesome = false;
+    private static $fontawesome_svg = true;
     private static $custom_requirements = [];
 
     /**
@@ -86,8 +87,12 @@ class DeferredRequirements implements TemplateGlobalProvider
                 ? Config::inst()->get(FontAwesomeField::class, 'version')
                 : $config['fontawesome_version'];
 
-            Requirements::customScript('FontAwesomeConfig={searchPseudoElements:true}');
-            self::loadJS('//use.fontawesome.com/releases/v'.$v.'/js/all.js');
+            if ($config['fontawesome_svg']) {
+                Requirements::customScript('FontAwesomeConfig={searchPseudoElements:true}');
+                self::loadJS('//use.fontawesome.com/releases/v'.$v.'/js/all.js');
+            } else {
+                self::loadCSS('//use.fontawesome.com/releases/v'.$v.'/css/all.css');
+            }
         }
 
         self::loadCSS($mainTheme.'.css');

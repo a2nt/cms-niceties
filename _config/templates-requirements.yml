@@ -9,6 +9,7 @@ A2nt\CMSNiceties\Templates\DeferredRequirements:
   noreact: false
   nojquery: true
   jquery_version: '3.4.1'
+  fontawesome_svg: true
 
 SilverStripe\FontAwesome\FontAwesomeField:
   version: '5.12.0'
