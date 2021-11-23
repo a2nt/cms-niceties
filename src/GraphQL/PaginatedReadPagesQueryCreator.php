@@ -1,8 +1,10 @@
 <?php
 
-
 namespace A2nt\CMSNiceties\GraphQL;
 
+if (!class_exists('SilverStripe\GraphQL\Pagination\PaginatedQueryCreator', true)) {
+    return;
+}
 
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
@@ -21,32 +23,32 @@ class PaginatedReadPagesQueryCreator extends PaginatedQueryCreator
         return Connection::create('readPages')
             ->setConnectionType($this->manager->getType('page'))
             ->setArgs([
-	            'Link' => [
-	            	'type' => Type::string()
-	            ]
+                'Link' => [
+                    'type' => Type::string()
+                ]
             ])
             ->setSortableFields(['Sort'])
             ->setConnectionResolver(static function ($object, array $args, $context, ResolveInfo $info) {
 
-            	if (isset($args['Link'])) {
-            		$link = $args['Link'];
+                if (isset($args['Link'])) {
+                    $link = $args['Link'];
 
-            		if(SiteTree::has_extension('\TractorCow\Fluent\Extension\FluentSiteTreeExtension')) {
-			            $arr = array_filter(explode('/', $args['Link']));
+                    if (SiteTree::has_extension('\TractorCow\Fluent\Extension\FluentSiteTreeExtension')) {
+                        $arr = array_filter(explode('/', $args['Link']));
 
-			            $locale = \TractorCow\Fluent\Model\Locale::get()->filter('URLSegment', array_shift($arr))->first();
-			            \TractorCow\Fluent\State\FluentState::singleton()->setLocale($locale->Locale);
+                        $locale = \TractorCow\Fluent\Model\Locale::get()->filter('URLSegment', array_shift($arr))->first();
+                        \TractorCow\Fluent\State\FluentState::singleton()->setLocale($locale->Locale);
 
-			            $link = implode('/', $arr);
-		            }
+                        $link = implode('/', $arr);
+                    }
 
 
-            		$list = ArrayList::create();
-            		$page = SiteTree::get_by_link($link);
-		            $list->add($page);
+                    $list = ArrayList::create();
+                    $page = SiteTree::get_by_link($link);
+                    $list->add($page);
                 }
 
-            	/*$list = \Page::get();
+                /*$list = \Page::get();
 
                 // Optional filtering by properties
                 if (isset($args['ID'])) {

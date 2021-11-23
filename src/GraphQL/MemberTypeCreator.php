@@ -1,8 +1,10 @@
 <?php
 
-
 namespace A2nt\CMSNiceties\GraphQL;
 
+if (!class_exists('SilverStripe\GraphQL\TypeCreator', true)) {
+    return;
+}
 
 use GraphQL\Type\Definition\Type;
 use SilverStripe\GraphQL\TypeCreator;

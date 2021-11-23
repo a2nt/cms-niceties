@@ -1,8 +1,10 @@
 <?php
 
-
 namespace A2nt\CMSNiceties\GraphQL;
 
+if (!class_exists('SilverStripe\GraphQL\QueryCreator', true)) {
+    return;
+}
 
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
