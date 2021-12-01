@@ -5,7 +5,7 @@
     <% include MetaHead %>
 </head>
 
-<body<% with $SiteConfig %> data-default-lng="$Longitude" data-default-lat="$Latitude"<% end_with %>>
+<body class="is-online"<% with $SiteConfig %> data-default-lng="$Longitude" data-default-lat="$Latitude"<% end_with %>>
     <div class="wrapper">
         <% include First %>
 
