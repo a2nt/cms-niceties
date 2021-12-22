@@ -81,20 +81,6 @@ class DeferredRequirements implements TemplateGlobalProvider
             }
         }
 
-        // App libs
-        if (!$config['nofontawesome']) {
-            $v = !isset($config['fontawesome_version']) || !$config['fontawesome_version']
-                ? Config::inst()->get(FontAwesomeField::class, 'version')
-                : $config['fontawesome_version'];
-
-            if ($config['fontawesome_svg']) {
-                Requirements::customScript('FontAwesomeConfig={searchPseudoElements:true}');
-                self::loadJS('//use.fontawesome.com/releases/v'.$v.'/js/all.js');
-            } else {
-                self::loadCSS('//use.fontawesome.com/releases/v'.$v.'/css/all.css');
-            }
-        }
-
         self::loadCSS($mainTheme.'.css');
 
         // hot reloading
@@ -134,6 +120,20 @@ class DeferredRequirements implements TemplateGlobalProvider
             self::loadJS($mainTheme.'_'.$curr_class . '.js');
         } elseif (file_exists($projectPath)) {
             self::loadJS($projectName.'_'.$curr_class . '.js');
+        }
+
+         // App libs
+        if (!$config['nofontawesome']) {
+            $v = !isset($config['fontawesome_version']) || !$config['fontawesome_version']
+                ? Config::inst()->get(FontAwesomeField::class, 'version')
+                : $config['fontawesome_version'];
+
+            if ($config['fontawesome_svg']) {
+                Requirements::customScript('FontAwesomeConfig={searchPseudoElements:true}');
+                self::loadJS('//use.fontawesome.com/releases/v'.$v.'/js/all.js');
+            } else {
+                self::loadCSS('//use.fontawesome.com/releases/v'.$v.'/css/all.css');
+            }
         }
 
         return self::forTemplate();
