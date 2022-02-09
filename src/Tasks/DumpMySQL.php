@@ -16,11 +16,15 @@ class DumpMySQL extends BuildTask
     {
         $cfg = DB::getConfig();
 
-        ob_clean();
+        try {
+            ob_clean();
+        } catch (Exception $e) {
+        }
 
         header('Content-Disposition: attachment; filename="backup-'.date('d-m-Y').'.sql"');
         passthru('mysqldump -u '.$cfg['username'].' --password="'.$cfg['password'].'" '.$cfg['database']);
 
+        ob_end_clean();
         exit(0);
     }
 }
