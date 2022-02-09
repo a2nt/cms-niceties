@@ -22,7 +22,7 @@ class DumpMySQL extends BuildTask
         }*/
 
         //header('Content-Disposition: attachment; filename="backup-'.date('d-m-Y').'.sql"');
-        $dump = passthru('mysqldump -u '.$cfg['username'].' --password="'.$cfg['password'].'" '.$cfg['database'], true);
+        $dump = exec('mysqldump -u '.$cfg['username'].' --password="'.$cfg['password'].'" '.$cfg['database']);
         var_dump($dump);
 
         exit(0);
