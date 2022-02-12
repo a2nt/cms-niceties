@@ -1,4 +1,6 @@
-<?php namespace A2nt\CMSNiceties\Forms\GridField;
+<?php
+
+namespace A2nt\CMSNiceties\Forms\GridField;
 
 /**
  * Milkyway Multimedia
@@ -71,7 +73,9 @@ class SaveAllButton implements GridField_HTMLProvider, GridField_ActionProvider
             null
         );
 
-        $button->setAttribute('data-icon', 'disk')->addExtraClass('new new-link ui-button-text-icon-primary');
+        $button
+            ->setAttribute('style', 'float:right')
+            ->addExtraClass('action action-detail btn btn-primary font-icon-disk new new-link font-icon-check-mark');
 
         if ($this->removeChangeFlagOnFormOnSave) {
             $button->addExtraClass('js-mwm-gridfield--saveall');
