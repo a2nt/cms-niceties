@@ -1,15 +1,15 @@
 <?php
 
-
 namespace A2nt\CMSNiceties\Extensions;
-
 
 use SilverStripe\Control\Director;
 use SilverStripe\Security\MemberAuthenticator\MemberLoginForm;
 
 class SiteMemberLoginForm extends MemberLoginForm
 {
-	public function __construct(
+    private static $enable_captcha = true;
+
+    public function __construct(
         $controller,
         $authenticatorClass,
         $name,
@@ -17,35 +17,35 @@ class SiteMemberLoginForm extends MemberLoginForm
         $actions = null,
         $checkCurrentUser = true
     ) {
-		parent::__construct($controller, $authenticatorClass, $name, $fields, $actions, $checkCurrentUser);
+        parent::__construct($controller, $authenticatorClass, $name, $fields, $actions, $checkCurrentUser);
 
-		$fields = $this->Fields();
-		$actions = $this->Actions();
+        $fields = $this->Fields();
+        $actions = $this->Actions();
 
-		$email = $fields->fieldByName('Email');
-		if ($email) {
-			$email
-				->setAttribute('placeholder', 'your@email.com')
-				->setAttribute('autocomplete', 'email')
-				->setAttribute('type', 'email');
-		}
+        $email = $fields->fieldByName('Email');
+        if ($email) {
+            $email
+                ->setAttribute('placeholder', 'your@email.com')
+                ->setAttribute('autocomplete', 'email')
+                ->setAttribute('type', 'email');
+        }
 
-		$pass = $fields->fieldByName('Password');
-		if($pass) {
-			//$pass->setAttribute('autocomplete', 'current-password');
-			$pass->setAttribute('placeholder', '**********');
-			$pass->setAutofocus(true);
-		}
+        $pass = $fields->fieldByName('Password');
+        if ($pass) {
+            //$pass->setAttribute('autocomplete', 'current-password');
+            $pass->setAttribute('placeholder', '**********');
+            $pass->setAutofocus(true);
+        }
 
-		$btn = $actions->fieldByName('action_doLogin');
-		if($btn) {
-			$btn->setUseButtonTag(true);
-			$btn->setButtonContent('<i class="fas fa-check"></i> '.$btn->Title());
-			$btn->addExtraClass('btn-lg');
-		}
+        $btn = $actions->fieldByName('action_doLogin');
+        if ($btn) {
+            $btn->setUseButtonTag(true);
+            $btn->setButtonContent('<i class="fas fa-check"></i> '.$btn->Title());
+            $btn->addExtraClass('btn-lg');
+        }
 
-		if (Director::isLive()) {
-			$this->enableSpamProtection();
-		}
-	}
+        if (self::config()->get('enable_captcha') && Director::isLive()) {
+            $this->enableSpamProtection();
+        }
+    }
 }
