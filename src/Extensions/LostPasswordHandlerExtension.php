@@ -45,12 +45,15 @@ class LostPasswordHandlerExtension extends LostPasswordHandler
             ? 'Thank you! A reset link has been sent to \''.$email.'\', provided an account exists for this email address.'
             : $message;
 
+        $fragment = DBField::create_field('HTMLFragment', "<p>$message</p>");
+
         return [
             'Title' => _t(
                 'SilverStripe\\Security\\Security.PASSWORDRESETSENTHEADER',
                 "Password reset link sent".($email ? ' to \''.$email.'\'' : '')
             ),
-            'ElementalArea' => DBField::create_field('HTMLFragment', "<p>$message</p>"),
+            'ElementalArea' => $fragment,
+            'Content' => $fragment,
         ];
     }
 
