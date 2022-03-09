@@ -140,7 +140,7 @@ class SaveAllButton implements GridField_HTMLProvider, GridField_ActionProvider
             $list->each(function ($item) {
                 if ($item->hasExtension('Versioned')) {
                     $item->writeToStage('Stage');
-                    $item->publish('Stage', 'Live');
+                    $item->copyVersionToStage('Stage', 'Live');
                 }
             });
         }
