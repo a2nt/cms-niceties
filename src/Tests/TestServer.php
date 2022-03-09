@@ -44,7 +44,7 @@ class TestServer extends BuildTask
         if (is_writable(TEMP_FOLDER)) {
             echo self::success(
                 'TMP (cache) dir <b>'.TEMP_FOLDER.'</b> dir is writable.'
-                .'Available space: '.self::formatBytes(disk_free_space(TEMP_FOLDER))
+                .' Available space: '.self::formatBytes(disk_free_space(TEMP_FOLDER))
             );
         } else {
             echo self::error('TMP (cache) dir <b>'.TEMP_FOLDER.'</b> dir is no writable!');
@@ -80,7 +80,7 @@ class TestServer extends BuildTask
         if (is_writable(ASSETS_DIR)) {
             echo self::success(
                 'Assets dir <b>'.ASSETS_DIR.'</b> dir is writable.'
-                .'Available space: '.self::formatBytes(disk_free_space(ASSETS_DIR))
+                .' Available space: '.self::formatBytes(disk_free_space(ASSETS_DIR))
             );
         } else {
             echo self::error('Assets dir <b>'.ASSETS_DIR.'</b> dir is no writable!');
