@@ -2,7 +2,6 @@
 
 namespace A2nt\CMSNiceties\Dashboard;
 
-use App\Models\VacancyCandidate;
 use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Assets\File;
 use SilverStripe\CMS\Model\SiteTree;
@@ -11,14 +10,12 @@ use SilverStripe\ORM\ArrayList;
 class Dashboard extends LeftAndMain
 {
     private static $menu_title = "Dashboard";
-	private static $url_segment = "dashboard";
-	private static $menu_priority = 100;
-	private static $url_priority = 30;
+    private static $url_segment = "dashboard";
+    private static $menu_priority = 100;
+    private static $url_priority = 30;
 
     private static $menu_icon_class = 'font-icon-dashboard';
-    private static $managed_models = [
-        VacancyCandidate::class,
-    ];
+    private static $managed_models = [];
 
     protected static function getRecentObjects($class, $limit = 10)
     {
@@ -40,7 +37,7 @@ class Dashboard extends LeftAndMain
     public function RecentObjects()
     {
         $models = self::config()->get('managed_models');
-        if(!count($models)){
+        if (!count($models)) {
             return null;
         }
 
