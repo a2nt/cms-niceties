@@ -6,6 +6,7 @@ use SilverStripe\Admin\LeftAndMain;
 use SilverStripe\Assets\File;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\ORM\ArrayList;
+use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 
 class Dashboard extends LeftAndMain
 {
@@ -15,7 +16,9 @@ class Dashboard extends LeftAndMain
     private static $url_priority = 30;
 
     private static $menu_icon_class = 'font-icon-dashboard';
-    private static $managed_models = [];
+    private static $managed_models = [
+        SubmittedForm::class,
+    ];
 
     protected static function getRecentObjects($class, $limit = 10)
     {
