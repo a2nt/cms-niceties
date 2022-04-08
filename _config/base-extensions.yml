@@ -40,6 +40,10 @@ SilverStripe\UserForms\Form\UserForm:
   extensions:
     - A2nt\CMSNiceties\Extensions\PlaceholderFormExtension
 
+SilverStripe\UserForms\Model\Submission\SubmittedForm:
+  extensions:
+    - A2nt\CMSNiceties\Extensions\SubmittedFormEx
+
 Page:
   searchable_objects:
     - A2nt\CMSNiceties\Models\TeamMember
