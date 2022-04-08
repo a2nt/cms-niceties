@@ -20,9 +20,9 @@ class SubmittedFormEx extends DataExtension
         $cols = $parent->SubmissionColumns();
         foreach ($cols as $col) {
             $name = $col->getField('Name');
-            $title .= ' '.$item->relField($name);
+            $title .= ' '.$obj->relField($name);
         }
-        
+
         return $title;
     }
 }
