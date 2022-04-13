@@ -122,7 +122,7 @@ class DeferredRequirements implements TemplateGlobalProvider
             self::loadJS($projectName.'_'.$curr_class . '.js');
         }
 
-         // App libs
+        // App libs
         if (!$config['nofontawesome']) {
             $v = !isset($config['fontawesome_version']) || !$config['fontawesome_version']
                 ? Config::inst()->get(FontAwesomeField::class, 'version')
@@ -215,7 +215,16 @@ class DeferredRequirements implements TemplateGlobalProvider
             return $url;
         }
 
-        $path = WebpackTemplateProvider::toPublicPath($url);
+        $projectName = WebpackTemplateProvider::projectName();
+        $path = Path::join(
+            Director::publicFolder(),
+            RESOURCES_DIR,
+            $projectName,
+            'client',
+            'dist',
+            (strpos($url, '.js') ? 'js' : 'css'),
+            $url
+        );
 
         $absolutePath = Director::getAbsFile($path);
         $hash = sha1_file($absolutePath);
