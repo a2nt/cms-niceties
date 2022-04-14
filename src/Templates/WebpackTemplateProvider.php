@@ -1,4 +1,5 @@
 <?php
+
 /** @noinspection PhpUnusedPrivateFieldInspection */
 
 /**
@@ -32,6 +33,7 @@ class WebpackTemplateProvider implements TemplateGlobalProvider
      */
     private static $dist = 'client/dist';
     private static $webp = false;
+    private static $absolute_path = false;
 
     /**
      * @return array
@@ -135,15 +137,23 @@ class WebpackTemplateProvider implements TemplateGlobalProvider
     public static function toPublicPath($path): string
     {
         $cfg = self::config();
-        return strpos($path, '//') === false ?
-            Controller::join_links(
-                RESOURCES_DIR,
-                self::projectName(),
-                $cfg['dist'],
-                (strpos($path, '.css') ? 'css' : 'js'),
-                $path
-            )
-            : $path;
+        if (strpos($path, '//')) {
+            return $path;
+        }
+
+        $link = Controller::join_links(
+            RESOURCES_DIR,
+            self::projectName(),
+            $cfg['dist'],
+            (strpos($path, '.css') ? 'css' : 'js'),
+            $path
+        );
+
+        if ($cfg['absolute_path']) {
+            $link = Director::absoluteURL($link);
+        }
+
+        return $link;
     }
 
     public static function config(): array
