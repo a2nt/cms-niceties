@@ -6,6 +6,11 @@ use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Forms\Form;
 use SilverStripe\ORM\DataExtension;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\HtmlEditorFieldExtension
+ *
+ * @property \A2nt\CMSNiceties\Extensions\HtmlEditorFieldExtension $owner
+ */
 class HtmlEditorFieldExtension extends DataExtension
 {
     public function updateMediaForm(Form $form)

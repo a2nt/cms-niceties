@@ -10,6 +10,11 @@ namespace A2nt\CMSNiceties\Extensions;
 
 use SilverStripe\ORM\DataExtension;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\ShoppingCartControllerExtension
+ *
+ * @property \A2nt\CMSNiceties\Extensions\ShoppingCartControllerExtension $owner
+ */
 class ShoppingCartControllerExtension extends DataExtension
 {
     public function updateAddResponse($request, $response, $product, $quantity)

@@ -15,6 +15,27 @@ use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Security\Member;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\SocialExtension
+ *
+ * @property \A2nt\ElementalBasics\Models\TeamMember|\A2nt\CMSNiceties\Extensions\SocialExtension $owner
+ * @property int $FacebookID
+ * @property int $LinkedInID
+ * @property int $PinterestID
+ * @property int $InstagramID
+ * @property int $TwitterID
+ * @property int $YouTubeID
+ * @property int $PublicEmailID
+ * @property int $PhoneNumberID
+ * @method \Sheadawson\Linkable\Models\Link Facebook()
+ * @method \Sheadawson\Linkable\Models\Link LinkedIn()
+ * @method \Sheadawson\Linkable\Models\Link Pinterest()
+ * @method \Sheadawson\Linkable\Models\Link Instagram()
+ * @method \Sheadawson\Linkable\Models\Link Twitter()
+ * @method \Sheadawson\Linkable\Models\Link YouTube()
+ * @method \Sheadawson\Linkable\Models\Link PublicEmail()
+ * @method \Sheadawson\Linkable\Models\Link PhoneNumber()
+ */
 class SocialExtension extends DataExtension
 {
     private static $db = [

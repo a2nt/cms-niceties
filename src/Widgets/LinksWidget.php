@@ -16,6 +16,11 @@ if (!class_exists(Widget::class)) {
     return;
 }
 
+/**
+ * Class \A2nt\CMSNiceties\Widgets\LinksWidget
+ *
+ * @method \SilverStripe\ORM\ManyManyList|\Sheadawson\Linkable\Models\Link[] Links()
+ */
 class LinksWidget extends Widget
 {
     private static $title = 'Links';

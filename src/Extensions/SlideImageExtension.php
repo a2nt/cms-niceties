@@ -16,6 +16,11 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\ToggleCompositeField;
 use SilverStripe\ORM\DataExtension;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\SlideImageExtension
+ *
+ * @property \A2nt\CMSNiceties\Extensions\SlideImageExtension $owner
+ */
 class SlideImageExtension extends DataExtension
 {
 

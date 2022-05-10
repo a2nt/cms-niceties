@@ -10,6 +10,12 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\DataExtension;
 
+/**
+ * Class \A2nt\CMSNiceties\Widgets\WidgetExtension
+ *
+ * @property \A2nt\CMSNiceties\Widgets\WidgetExtension $owner
+ * @property boolean $ShowTitle
+ */
 class WidgetExtension extends DataExtension
 {
     private static $db = [

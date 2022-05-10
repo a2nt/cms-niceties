@@ -13,6 +13,11 @@ use SilverStripe\Core\Extension;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\AddressExtension
+ *
+ * @property \A2nt\CMSNiceties\Extensions\AddressExtension $owner
+ */
 class AddressExtension extends Extension
 {
     public function updateFormFields(FieldList $fields)

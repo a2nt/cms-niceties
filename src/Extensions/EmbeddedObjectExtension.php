@@ -9,6 +9,14 @@ use SilverStripe\Forms\TextareaField;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataExtension;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\EmbeddedObjectExtension
+ *
+ * @property \A2nt\CMSNiceties\Extensions\EmbeddedObjectExtension $owner
+ * @property boolean $Autoplay
+ * @property boolean $Loop
+ * @property boolean $Controls
+ */
 class EmbeddedObjectExtension extends DataExtension
 {
     private static $db = [

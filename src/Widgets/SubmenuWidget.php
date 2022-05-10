@@ -10,6 +10,11 @@ if (!class_exists(Widget::class)) {
     return;
 }
 
+/**
+ * Class \A2nt\CMSNiceties\Widgets\SubmenuWidget
+ *
+ * @property boolean $TopLevelSubmenu
+ */
 class SubmenuWidget extends Widget
 {
     private static $title = 'Sub-Menu';

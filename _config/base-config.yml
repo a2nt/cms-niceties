@@ -23,3 +23,6 @@ SilverStripe\Admin\LeftAndMain:
 SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
   editor_css:
     - 'app/client/dist/css/app_editor.css'
+
+SilverLeague\IDEAnnotator\DataObjectAnnotator:
+  enabled: true

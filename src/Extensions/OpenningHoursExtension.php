@@ -29,6 +29,17 @@ use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
 use Symbiote\GridFieldExtensions\GridFieldTitleHeader;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\OpenningHoursExtension
+ *
+ * @property \A2nt\CMSNiceties\Extensions\OpenningHoursExtension $owner
+ * @property boolean $ShowOpeningHours
+ * @property string $OpenningHoursNote
+ * @property int $OpeningHoursPageID
+ * @method \SilverStripe\CMS\Model\SiteTree OpeningHoursPage()
+ * @method \SilverStripe\ORM\DataList|\A2nt\CMSNiceties\Models\OpeningHour[] OpeningHours()
+ * @method \SilverStripe\ORM\DataList|\A2nt\CMSNiceties\Models\Holiday[] Holidays()
+ */
 class OpenningHoursExtension extends DataExtension
 {
     private static $db = [

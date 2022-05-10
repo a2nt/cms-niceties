@@ -14,6 +14,12 @@ if (!class_exists(Widget::class)) {
     return;
 }
 
+/**
+ * Class \A2nt\CMSNiceties\Widgets\ElementWidget
+ *
+ * @property int $ElementID
+ * @method \DNADesign\Elemental\Models\BaseElement Element()
+ */
 class ElementWidget extends Widget
 {
     private static $title = 'Virtual Element';

@@ -9,6 +9,11 @@ use SilverStripe\Widgets\Forms\WidgetAreaEditor;
 use SilverStripe\Widgets\Model\Widget;
 use SilverStripe\Widgets\Model\WidgetArea;
 
+/**
+ * Class \A2nt\CMSNiceties\Widgets\WidgetPageExtension
+ *
+ * @property \A2nt\CMSNiceties\Widgets\WidgetPageExtension $owner
+ */
 class WidgetPageExtension extends \SilverStripe\Widgets\Extensions\WidgetPageExtension
 {
     public function updateCMSFields(FieldList $fields)

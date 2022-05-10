@@ -14,6 +14,11 @@ if (!class_exists(Widget::class)) {
     return;
 }
 
+/**
+ * Class \A2nt\CMSNiceties\Widgets\ContentWidget
+ *
+ * @property string $Text
+ */
 class ContentWidget extends Widget
 {
     private static $title = 'Content';

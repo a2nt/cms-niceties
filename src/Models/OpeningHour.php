@@ -15,6 +15,18 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\SiteConfig\SiteConfig;
 
+/**
+ * Class \A2nt\CMSNiceties\Models\OpeningHour
+ *
+ * @property string $Day
+ * @property string $From
+ * @property string $Till
+ * @property string $Comment
+ * @property string $DisplayStart
+ * @property string $DisplayEnd
+ * @property int $ParentID
+ * @method \SilverStripe\SiteConfig\SiteConfig Parent()
+ */
 class OpeningHour extends DataObject
 {
     private static $table_name = 'OpeningHour';

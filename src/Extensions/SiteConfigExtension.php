@@ -18,6 +18,25 @@ use SilverStripe\Forms\DropdownField;
 
 //use BetterBrief\GoogleMapField;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\SiteConfigExtension
+ *
+ * @property \A2nt\CMSNiceties\Extensions\SiteConfigExtension $owner
+ * @property string $ExtraCode
+ * @property float $Longitude
+ * @property float $Latitude
+ * @property int $MapZoom
+ * @property string $Description
+ * @property string $Address
+ * @property string $Suburb
+ * @property string $State
+ * @property string $ZipCode
+ * @property int $PrivacyPolicyID
+ * @property int $SitemapID
+ * @method \SilverStripe\CMS\Model\SiteTree PrivacyPolicy()
+ * @method \SilverStripe\CMS\Model\SiteTree Sitemap()
+ * @method \SilverStripe\ORM\ManyManyList|\SilverStripe\CMS\Model\SiteTree[] Navigation()
+ */
 class SiteConfigExtension extends DataExtension
 {
     private static $db = [

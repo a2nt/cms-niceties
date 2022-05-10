@@ -13,6 +13,12 @@ use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\BlogPostExtension
+ *
+ * @property \A2nt\CMSNiceties\Extensions\BlogPostExtension $owner
+ * @property boolean $Featured
+ */
 class BlogPostExtension extends DataExtension
 {
     private static $db = [

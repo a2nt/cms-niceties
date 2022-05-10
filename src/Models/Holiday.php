@@ -15,6 +15,14 @@ use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\SiteConfig\SiteConfig;
 
+/**
+ * Class \A2nt\CMSNiceties\Models\Holiday
+ *
+ * @property string $Title
+ * @property string $Date
+ * @property int $ParentID
+ * @method \SilverStripe\SiteConfig\SiteConfig Parent()
+ */
 class Holiday extends DataObject
 {
     private static $table_name = 'Holiday';

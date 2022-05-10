@@ -8,6 +8,10 @@ use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\UserForms\Model\Submission\SubmittedForm;
 
+/**
+ * Class \A2nt\CMSNiceties\Dashboard\Dashboard
+ *
+ */
 class Dashboard extends LeftAndMain
 {
     private static $menu_title = "Dashboard";

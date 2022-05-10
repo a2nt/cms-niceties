@@ -11,6 +11,10 @@ namespace A2nt\CMSNiceties\Extensions;
 use SilverStripe\ORM\HiddenClass;
 use Page;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\CMSMain_HiddenClass
+ *
+ */
 class CMSMain_HiddenClass extends Page implements HiddenClass
 {
 

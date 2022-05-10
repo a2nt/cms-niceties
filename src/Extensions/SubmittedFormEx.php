@@ -4,6 +4,11 @@ namespace A2nt\CMSNiceties\Extensions;
 
 use SilverStripe\ORM\DataExtension;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\SubmittedFormEx
+ *
+ * @property \A2nt\CMSNiceties\Extensions\SubmittedFormEx $owner
+ */
 class SubmittedFormEx extends DataExtension
 {
     public function Title()

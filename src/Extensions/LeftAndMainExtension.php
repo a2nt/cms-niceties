@@ -9,6 +9,11 @@ use SilverStripe\FontAwesome\FontAwesomeField;
 use SilverStripe\View\Requirements;
 use A2nt\CMSNiceties\Templates\DeferredRequirements;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\LeftAndMainExtension
+ *
+ * @property \A2nt\CMSNiceties\Extensions\LeftAndMainExtension $owner
+ */
 class LeftAndMainExtension extends Extension
 {
     public function init()

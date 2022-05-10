@@ -8,6 +8,11 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\ORM\DataExtension;
 use TractorCow\Fluent\Model\Locale;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\PageFluentExtension
+ *
+ * @property \A2nt\CMSNiceties\Extensions\PageFluentExtension $owner
+ */
 class PageFluentExtension extends DataExtension
 {
     /**

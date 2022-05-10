@@ -8,13 +8,25 @@
 
 namespace A2nt\CMSNiceties\Models;
 
-use Dynamic\FlexSlider\Model\SlideImage;
 use Sheadawson\Linkable\Forms\LinkField;
 use Sheadawson\Linkable\Models\Link;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\SiteConfig\SiteConfig;
 
+/**
+ * Class \A2nt\CMSNiceties\Models\Notification
+ *
+ * @property string $Title
+ * @property string $Content
+ * @property string $DateOn
+ * @property string $DateOff
+ * @property string $Area
+ * @property int $ParentID
+ * @property int $TargetLinkID
+ * @method \SilverStripe\SiteConfig\SiteConfig Parent()
+ * @method \Sheadawson\Linkable\Models\Link TargetLink()
+ */
 class Notification extends DataObject
 {
     private static $table_name = 'Notification';

@@ -13,6 +13,14 @@ if (!class_exists(Widget::class)) {
     return;
 }
 
+/**
+ * Class \A2nt\CMSNiceties\Widgets\BannerWidget
+ *
+ * @property int $ImageID
+ * @property int $LinkID
+ * @method \SilverStripe\Assets\Image Image()
+ * @method \Sheadawson\Linkable\Models\Link Link()
+ */
 class BannerWidget extends Widget
 {
     private static $title = 'Banner';

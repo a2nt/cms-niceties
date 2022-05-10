@@ -2,14 +2,7 @@
 
 namespace A2nt\CMSNiceties\Extensions;
 
-use Dynamic\Elements\Blog\Elements\ElementBlogPosts;
-use Innoweb\Sitemap\Pages\SitemapPage;
-use Sheadawson\Linkable\Forms\LinkField;
-use Sheadawson\Linkable\Models\Link;
-use SilverStripe\AssetAdmin\Forms\UploadField;
-use SilverStripe\Assets\Image;
 use SilverStripe\Forms\CheckboxField;
-use SilverStripe\Forms\DropdownField;
 use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
@@ -18,20 +11,20 @@ use SilverStripe\Forms\GridField\GridFieldEditButton;
 use SilverStripe\Forms\GridField\GridFieldToolbarHeader;
 use SilverStripe\Forms\HeaderField;
 use SilverStripe\Forms\LiteralField;
-use SilverStripe\Forms\TextareaField;
-use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataExtension;
-use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Forms\FieldList;
-use SilverStripe\Forms\TreeMultiselectField;
-use BetterBrief\GoogleMapField;
-use A2nt\CMSNiceties\Models\Holiday;
 use A2nt\CMSNiceties\Models\Notification;
-use A2nt\CMSNiceties\Models\OpeningHour;
 use Symbiote\GridFieldExtensions\GridFieldAddNewInlineButton;
 use Symbiote\GridFieldExtensions\GridFieldEditableColumns;
 use Symbiote\GridFieldExtensions\GridFieldTitleHeader;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\NotificationsExtension
+ *
+ * @property \A2nt\CMSNiceties\Extensions\NotificationsExtension $owner
+ * @property boolean $ShowNotifications
+ * @method \SilverStripe\ORM\DataList|\A2nt\CMSNiceties\Models\Notification[] Notifications()
+ */
 class NotificationsExtension extends DataExtension
 {
     private static $db = [

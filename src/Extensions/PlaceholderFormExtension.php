@@ -7,6 +7,11 @@ use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 
+/**
+ * Class \A2nt\CMSNiceties\Extensions\PlaceholderFormExtension
+ *
+ * @property \A2nt\CMSNiceties\Extensions\PlaceholderFormExtension $owner
+ */
 class PlaceholderFormExtension extends Extension
 {
     public function updateFormFields(FieldList $fields)
