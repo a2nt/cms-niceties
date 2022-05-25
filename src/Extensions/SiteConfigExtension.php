@@ -15,6 +15,7 @@ use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TreeMultiselectField;
 use SilverStripe\Forms\DropdownField;
+use Symbiote\Addressable\Addressable;
 
 //use BetterBrief\GoogleMapField;
 
@@ -44,11 +45,11 @@ class SiteConfigExtension extends DataExtension
         'Longitude' => 'Decimal(10, 8)',
         'Latitude' => 'Decimal(11, 8)',
         'MapZoom' => 'Int',
-        //'MapAPIKey' => 'Varchar(255)',
         'Description' => 'Varchar(255)',
         'Address' => 'Varchar(255)',
         'Suburb' => 'Varchar(255)',
         'State' => 'Varchar(255)',
+        'Country' => 'Varchar(255)',
         'ZipCode' => 'Varchar(6)',
     ];
 
@@ -98,12 +99,40 @@ class SiteConfigExtension extends DataExtension
         $mapTab = $fields->findOrMakeTab('Root.Maps');
         $mapTab->setTitle('Address / Map');
 
-        $fields->addFieldsToTab('Root.Maps', [
+
+        $addrFields =[
             TextField::create('Address'),
-            TextField::create('Suburb', 'City'),
-            TextField::create('State'),
             TextField::create('ZipCode'),
-        ]);
+            TextField::create('Suburb', 'City'),
+        ];
+
+        if (\class_exists(Addressable::class)) {
+            $addr = \singleton(Addressable::class);
+
+
+            $stateLabel = _t('Addressable.STATE', 'State');
+            $allowedStates = $addr->getAllowedStates();
+            if (count($allowedStates) >= 1) {
+                // If allowed states are restricted, only allow those
+                $addrFields[] = DropdownField::create('State', $stateLabel, $allowedStates);
+            } elseif (!$allowedStates) {
+                // If no allowed states defined, allow the user to type anything
+                $addrFields[] = TextField::create('State', $stateLabel);
+            }
+
+            // Get country field
+            $addrFields[] = DropdownField::create(
+                'Country',
+                _t('Addressable.COUNTRY', 'Country'),
+                $addr->getAllowedCountries()
+            );
+        } else {
+            $addrFields[] = TextField::create('State');
+            $addrFields[] = TextField::create('Country');
+        }
+
+
+        $fields->addFieldsToTab('Root.Maps', $addrFields);
 
         if (MapboxField::getAccessToken()) {
             $fields->addFieldsToTab('Root.Maps', [

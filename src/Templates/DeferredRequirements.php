@@ -66,7 +66,7 @@ class DeferredRequirements implements TemplateGlobalProvider
         // Main libs
         if (!$config['nojquery']) {
             self::loadJS(
-                '//ajax.googleapis.com/ajax/libs/jquery/'
+                'https://ajax.googleapis.com/ajax/libs/jquery/'
                 .$config['jquery_version'].'/jquery.min.js'
             );
         }
@@ -140,9 +140,9 @@ class DeferredRequirements implements TemplateGlobalProvider
 
             if ($config['fontawesome_svg']) {
                 Requirements::customScript('FontAwesomeConfig={searchPseudoElements:true}');
-                self::loadJS('//use.fontawesome.com/releases/v'.$v.'/js/all.js');
+                self::loadJS('https://use.fontawesome.com/releases/v'.$v.'/js/all.js');
             } else {
-                self::loadCSS('//use.fontawesome.com/releases/v'.$v.'/css/all.css');
+                self::loadCSS('https://use.fontawesome.com/releases/v'.$v.'/css/all.css');
             }
         }
 
