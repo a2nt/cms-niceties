@@ -111,7 +111,7 @@ class SiteConfigExtension extends DataExtension
         if (\class_exists(Addressable::class)) {
             $stateLabel = _t('Addressable.STATE', 'State');
             $allowedStates = Config::inst()->get(SiteConfig::class, 'allowed_states');
-            if (count($allowedStates) >= 1) {
+            if ($allowedStates && count($allowedStates) >= 1) {
                 // If allowed states are restricted, only allow those
                 $addrFields[] = DropdownField::create('State', $stateLabel, $allowedStates);
             } elseif (!$allowedStates) {
@@ -120,11 +120,17 @@ class SiteConfigExtension extends DataExtension
             }
 
             // Get country field
-            $addrFields[] = DropdownField::create(
-                'Country',
-                _t('Addressable.COUNTRY', 'Country'),
-                Config::inst()->get(SiteConfig::class, 'allowed_countries')
-            );
+            $countryLabel = _t('Addressable.COUNTRY', 'Country');
+            $allowedCountries = Config::inst()->get(SiteConfig::class, 'allowed_countries');
+            if($allowedCountries && count($allowedCountries) >= 1) {
+                $addrFields[] = DropdownField::create(
+                    'Country',
+                    $countryLabel,
+                    $allowedCountries
+                );
+            } else {
+                $addrFields[] = TextField::create('Country', $countryLabel);
+            }
         } else {
             $addrFields[] = TextField::create('State');
             $addrFields[] = TextField::create('Country');
