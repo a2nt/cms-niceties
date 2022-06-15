@@ -16,6 +16,8 @@ use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TreeMultiselectField;
 use SilverStripe\Forms\DropdownField;
 use Symbiote\Addressable\Addressable;
+use SilverStripe\SiteConfig\SiteConfig;
+use SilverStripe\Core\Config\Config;
 
 //use BetterBrief\GoogleMapField;
 
@@ -107,11 +109,8 @@ class SiteConfigExtension extends DataExtension
         ];
 
         if (\class_exists(Addressable::class)) {
-            $addr = \singleton(Addressable::class);
-
-
             $stateLabel = _t('Addressable.STATE', 'State');
-            $allowedStates = $addr->getAllowedStates();
+            $allowedStates = Config::inst()->get(SiteConfig::class, 'allowed_states');
             if (count($allowedStates) >= 1) {
                 // If allowed states are restricted, only allow those
                 $addrFields[] = DropdownField::create('State', $stateLabel, $allowedStates);
@@ -124,7 +123,7 @@ class SiteConfigExtension extends DataExtension
             $addrFields[] = DropdownField::create(
                 'Country',
                 _t('Addressable.COUNTRY', 'Country'),
-                $addr->getAllowedCountries()
+                Config::inst()->get(SiteConfig::class, 'allowed_countries')
             );
         } else {
             $addrFields[] = TextField::create('State');
