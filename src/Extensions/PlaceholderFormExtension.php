@@ -2,6 +2,7 @@
 
 namespace A2nt\CMSNiceties\Extensions;
 
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
@@ -31,7 +32,14 @@ class PlaceholderFormExtension extends Extension
                     'placeholder',
                     $placeholder
                 );
-                $field->setTitle('');
+
+                /*
+                 *  SilverStripe\UserForms\Form\UserForm:
+                 *      show_labels: false
+                 */
+                if (!Config::inst()->get(\get_class($this->owner), 'show_labels')) {
+                    $field->setTitle('');
+                }
             }
         }
 

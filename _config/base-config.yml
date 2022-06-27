@@ -26,3 +26,6 @@ SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
 
 SilverLeague\IDEAnnotator\DataObjectAnnotator:
   enabled: true
+
+SilverStripe\UserForms\Form\UserForm:
+  show_labels: false
