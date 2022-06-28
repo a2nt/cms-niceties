@@ -28,10 +28,12 @@ class PlaceholderFormExtension extends Extension
             if (!$field->getAttribute('placeholder')) {
                 $placeholder = $field->Title() .($field->hasClass('requiredField') ? '*' : '');
 
-                $field->setAttribute(
-                    'placeholder',
-                    $placeholder
-                );
+                if (!Config::inst()->get(\get_class($this->owner), 'no_placeholders')) {
+                    $field->setAttribute(
+                        'placeholder',
+                        $placeholder
+                    );
+                }
 
                 /*
                  *  SilverStripe\UserForms\Form\UserForm:
