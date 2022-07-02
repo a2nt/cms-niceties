@@ -23,6 +23,7 @@
     "autoload": {
         "psr-4": {
             "A2nt\\CMSNiceties\\": "src/"
-        }
+        },
+        "exclude-from-classmap": ["vendor/dynamic/flexslider/src/Model/SlideImage.php"],
     }
 }
