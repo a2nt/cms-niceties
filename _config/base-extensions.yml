@@ -31,8 +31,8 @@ Dynamic\FlexSlider\Model\SlideImage:
 SilverStripe\Core\Injector\Injector:
   #SilverStripe\UserForms\Model\UserDefinedForm:
   #  class: A2nt\CMSNiceties\Extensions\UserDefinedForm_HiddenClass
-  Sheadawson\Linkable\Forms\EmbeddedObjectField:
-    class: A2nt\CMSNiceties\Extensions\EmbedObjectField
+  #Sheadawson\Linkable\Forms\EmbeddedObjectField:
+  #  class: A2nt\CMSNiceties\Extensions\EmbedObjectField
   SilverStripe\Forms\CompositeField:
     class: A2nt\CMSNiceties\Extensions\CompositeFieldExtension
 
