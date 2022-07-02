@@ -16,11 +16,12 @@
         "silverstripe/cms": "^4",
         "a2nt/silverstripe-elemental-basics": "*",
         "silverstripe/widgets": "*",
-        "drmartingonzo/ss-tinymce-charcount": "*"
+        "drmartingonzo/ss-tinymce-charcount": "*",
+        "gorriecoe/silverstripe-embed": "*"
     },
     "autoload": {
         "psr-4": {
-            "A2nt\\ElementalBasics\\": "src/"
+            "A2nt\\CMSNiceties\\": "src/"
         }
     }
 }
