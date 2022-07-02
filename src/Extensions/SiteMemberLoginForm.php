@@ -4,6 +4,7 @@ namespace A2nt\CMSNiceties\Extensions;
 
 use SilverStripe\Control\Director;
 use SilverStripe\Security\MemberAuthenticator\MemberLoginForm;
+use SilverStripe\View\Requirements;
 
 class SiteMemberLoginForm extends MemberLoginForm
 {
@@ -22,6 +23,7 @@ class SiteMemberLoginForm extends MemberLoginForm
         $fields = $this->Fields();
         $actions = $this->Actions();
 
+        Requirements::customScript('document.querySelector(".field-password__show-password").addEventListener("click",function(e){e.preventDefault();var p = document.querySelector(\'[name="Password"]\');if(p.getAttribute("type")==="password"){var attr="text";}else{var attr="password"}p.setAttribute("type", attr);});');
         $email = $fields->fieldByName('Email');
         if ($email) {
             $email
