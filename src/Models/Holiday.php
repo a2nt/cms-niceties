@@ -9,8 +9,6 @@
 namespace A2nt\CMSNiceties\Models;
 
 use Dynamic\FlexSlider\Model\SlideImage;
-use Sheadawson\Linkable\Forms\LinkField;
-use Sheadawson\Linkable\Models\Link;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\SiteConfig\SiteConfig;

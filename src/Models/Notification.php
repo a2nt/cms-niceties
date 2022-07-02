@@ -8,8 +8,8 @@
 
 namespace A2nt\CMSNiceties\Models;
 
-use Sheadawson\Linkable\Forms\LinkField;
-use Sheadawson\Linkable\Models\Link;
+use gorriecoe\Link\Models\Link;
+use gorriecoe\LinkField\LinkField;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\SiteConfig\SiteConfig;
@@ -63,7 +63,7 @@ class Notification extends DataObject
         $fields = parent::getCMSFields();
 
         $fields->addFieldsToTab('Root.Main', [
-            LinkField::create('TargetLinkID', 'Link'),
+            LinkField::create('TargetLink', 'Link', $this),
         ]);
 
         return $fields;

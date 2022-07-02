@@ -8,8 +8,6 @@
 
 namespace A2nt\CMSNiceties\Extensions;
 
-use Sheadawson\Linkable\Forms\LinkField;
-use Sheadawson\Linkable\Models\Link;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;

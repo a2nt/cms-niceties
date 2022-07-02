@@ -3,8 +3,8 @@
 
 namespace A2nt\CMSNiceties\Widgets;
 
-use Sheadawson\Linkable\Forms\LinkField;
-use Sheadawson\Linkable\Models\Link;
+use gorriecoe\Link\Models\Link;
+use gorriecoe\LinkField\LinkField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 use SilverStripe\Widgets\Model\Widget;
@@ -46,7 +46,7 @@ class BannerWidget extends Widget
         $fields->push(UploadField::create('Image', 'Image (minimal width 301px)')
                 ->setAllowedFileCategories(['image/supported']));
 
-        $fields->push(LinkField::create('LinkID', 'Link'));
+        $fields->push(LinkField::create('Link', 'Link', $this));
 
         return $fields;
     }

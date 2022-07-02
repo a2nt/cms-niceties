@@ -8,8 +8,8 @@
 
 namespace A2nt\CMSNiceties\Extensions;
 
-use Sheadawson\Linkable\Forms\LinkField;
-use Sheadawson\Linkable\Models\Link;
+use gorriecoe\Link\Models\Link;
+use gorriecoe\LinkField\LinkField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
 use SilverStripe\ORM\DataExtension;
@@ -57,26 +57,34 @@ class SocialExtension extends DataExtension
     {
         parent::updateCMSFields($fields);
 
-        $linkFields = [
-            LinkField::create('FacebookID', 'Facebook'),
-            LinkField::create('LinkedInID', 'LinkedIn'),
-            LinkField::create('PinterestID', 'Pinterest'),
-            LinkField::create('InstagramID', 'Instagram'),
-            LinkField::create('TwitterID', 'Twitter'),
-            LinkField::create('YouTubeID', 'YouTube'),
+        $cfg = [
+            'types' => [
+                'URL',
+            ],
         ];
 
-        foreach ($linkFields as $field) {
-            $field->setAllowedTypes(['URL']);
-        }
+        $linkFields = [
+            LinkField::create('Facebook', 'Facebook', $this->owner, $cfg),
+            LinkField::create('LinkedIn', 'LinkedIn', $this->owner, $cfg),
+            LinkField::create('Pinterest', 'Pinterest', $this->owner, $cfg),
+            LinkField::create('Instagram', 'Instagram', $this->owner, $cfg),
+            LinkField::create('Twitter', 'Twitter', $this->owner, $cfg),
+            LinkField::create('YouTube', 'YouTube', $this->owner, $cfg),
+        ];
 
         $fields->findOrMakeTab('Root.Social');
 
         $fields->addFieldsToTab('Root.Social', [
-            LinkField::create('PublicEmailID', 'Public Email')
-                ->setAllowedTypes(['Email']),
-            LinkField::create('PhoneNumberID', 'Phone Number')
-                ->setAllowedTypes(['Phone']),
+            LinkField::create('PublicEmail', 'Public Email', $this->owner, [
+                'types' => [
+                    'Email',
+                ],
+            ]),
+            LinkField::create('PhoneNumber', 'Phone Number', $this->owner, [
+                'types' => [
+                    'Phone',
+                ],
+            ]),
         ]);
 
         $fields->addFieldsToTab('Root.Social', $linkFields);

@@ -4,8 +4,6 @@ namespace A2nt\CMSNiceties\Extensions;
 
 use Dynamic\Elements\Blog\Elements\ElementBlogPosts;
 use Innoweb\Sitemap\Pages\SitemapPage;
-use Sheadawson\Linkable\Forms\LinkField;
-use Sheadawson\Linkable\Models\Link;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\CheckboxField;
