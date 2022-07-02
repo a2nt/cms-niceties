@@ -3,8 +3,8 @@
 
 namespace A2nt\CMSNiceties\Widgets;
 
-use Sheadawson\Linkable\Forms\LinkField;
-use Sheadawson\Linkable\Models\Link;
+use gorriecoe\Link\Models\Link;
+use gorriecoe\LinkField\LinkField;
 use SilverStripe\AssetAdmin\Forms\UploadField;
 use SilverStripe\Assets\Image;
 use SilverStripe\Forms\GridField\GridField;
@@ -42,11 +42,10 @@ class LinksWidget extends Widget
         $fields = parent::getCMSFields();
 
         if($this->ID) {
-            $fields->push(GridField::create(
+            $fields->push(LinkField::create(
                 'Links',
-                '',
-                $this->Links(),
-                GridFieldConfig_RecordEditor::create()
+                'Links',
+                $this
             ));
         }else{
             $fields->push(LiteralField::create(

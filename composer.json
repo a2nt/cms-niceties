@@ -17,7 +17,8 @@
         "a2nt/silverstripe-elemental-basics": "*",
         "silverstripe/widgets": "*",
         "drmartingonzo/ss-tinymce-charcount": "*",
-        "gorriecoe/silverstripe-embed": "*"
+        "gorriecoe/silverstripe-embed": "*",
+        "gorriecoe/silverstripe-linkfield": "*"
     },
     "autoload": {
         "psr-4": {
