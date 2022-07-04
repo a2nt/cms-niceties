@@ -30,4 +30,12 @@ class BlogPostExtension extends DataExtension
         $mainTab = $fields->findOrMakeTab('Root.Main');
         $mainTab->push(CheckboxField::create('Featured'));
     }
+
+    public function forTemplateShort()
+    {
+        return $this->owner->renderWith([
+            $this->owner->ClassName.'_short',
+            'SilverStripe\Blog\Includes\BlogPostInfo'
+        ]);
+    }
 }
