@@ -35,6 +35,10 @@ SilverStripe\Core\Injector\Injector:
   #  class: A2nt\CMSNiceties\Extensions\EmbedObjectField
   SilverStripe\Forms\CompositeField:
     class: A2nt\CMSNiceties\Extensions\CompositeFieldExtension
+  SilverStripe\Forms\GridField\GridFieldConfig_RecordEditor:
+    class: A2nt\CMSNiceties\Forms\GridField\GridFieldConfig_RecordEditor
+  SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor:
+    class: A2nt\CMSNiceties\Forms\GridField\GridFieldConfig_RelationEditor
 
 SilverStripe\UserForms\Form\UserForm:
   extensions:
