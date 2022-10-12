@@ -51,6 +51,7 @@ class SocialExtension extends DataExtension
         'YouTube' => Link::class,
         'PublicEmail' => Link::class,
         'PhoneNumber' => Link::class,
+        'Tiktok' => Link::class,
     ];
 
     public function updateCMSFields(FieldList $fields)
@@ -70,6 +71,7 @@ class SocialExtension extends DataExtension
             LinkField::create('Instagram', 'Instagram', $this->owner, $cfg),
             LinkField::create('Twitter', 'Twitter', $this->owner, $cfg),
             LinkField::create('YouTube', 'YouTube', $this->owner, $cfg),
+            LinkField::create('Tiktok', 'Tiktok' , $this->owner, $cfg),
         ];
 
         $fields->findOrMakeTab('Root.Social');
