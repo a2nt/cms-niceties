@@ -29,7 +29,8 @@ class TestServer extends BuildTask
         echo self::success('BASE_PATH: <b>'.BASE_PATH.'</b>');
         echo self::success('PHP: <b>'.phpversion().'</b>');
 
-        $v = Deprecation::dump_settings()['version'];
+        $v = Deprecation::dump_settings();
+        $v = $v ? $v['version'] : null;
         if ($v) {
             echo self::success('SilverStipe version: <b>'.$v.'</b>');
         } else {
