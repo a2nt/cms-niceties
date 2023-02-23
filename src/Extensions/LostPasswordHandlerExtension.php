@@ -50,6 +50,7 @@ class LostPasswordHandlerExtension extends LostPasswordHandler
                 'SilverStripe\\Security\\Security.PASSWORDRESETSENTHEADER',
                 "Password reset link sent".($email ? ' to \''.$email.'\'' : '')
             ),
+            'Form' => $this->lostPasswordForm(),
             'ElementalArea' => $fragment,
             'Content' => $fragment,
         ];
