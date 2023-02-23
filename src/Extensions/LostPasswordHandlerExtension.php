@@ -39,11 +39,14 @@ class LostPasswordHandlerExtension extends LostPasswordHandler
         );
 
         $email = $this->getRequest()->getVar('email');
-        $message = $email
+        /*$message = $email
             ? 'Thank you! A reset link has been sent to \''.$email.'\', provided an account exists for this email address.'
-            : $message;
+            : $message;*/
 
-        $fragment = DBField::create_field('HTMLFragment', "<p>$message</p>");
+        $fragment = DBField::create_field(
+            'HTMLFragment',
+            '<p class="alert alert-success">'.$message.'</p>'
+        );
 
         return [
             'Title' => _t(
