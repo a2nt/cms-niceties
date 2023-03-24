@@ -44,15 +44,16 @@ class SaveAllButton implements GridField_HTMLProvider, GridField_ActionProvider
 
     public function getHTMLFragments($gridField)
     {
-        $singleton = singleton($gridField->getModelClass());
+        $class = $gridField->getModelClass();
+        $singleton = singleton($class);
 
         if (!$singleton->canEdit() && !$singleton->canCreate()) {
             return [];
         }
 
         if (!$this->buttonName) {
-            if ($this->publish && $singleton->hasExtension('Versioned')) {
-                $this->buttonName = _t('GridField.SAVE_ALL_AND_PUBLISH', 'Save all and publish');
+            if ($this->publish && $singleton->hasExtension(Versioned::class)) {
+                $this->buttonName = _t('GridField.SAVE_ALL_AND_PUBLISH', 'Save all and Publish');
             } else {
                 $this->buttonName = _t('GridField.SAVE_ALL', 'Save all');
             }
@@ -93,7 +94,9 @@ class SaveAllButton implements GridField_HTMLProvider, GridField_ActionProvider
 
     protected function saveAllRecords(GridField $grid, $arguments, $data)
     {
-        if (!isset($data[$grid->Name])) {
+        if (!isset($data[$grid->Name])
+            || !isset($data[$grid->Name]['GridFieldEditableColumns'])
+        ) {
             return;
         }
 
@@ -109,7 +112,7 @@ class SaveAllButton implements GridField_HTMLProvider, GridField_ActionProvider
         }
 
         // Only use the viewable list items, since bulk publishing can take a toll on the system
-        $paginator = $cfg->getComponentByType('GridFieldPaginator');
+        $paginator = $cfg->getComponentByType(GridFieldPaginator::class);
         $list = $paginator
             ? $paginator->getManipulatedData($grid, $grid->List)
             : $grid->List;
@@ -138,9 +141,12 @@ class SaveAllButton implements GridField_HTMLProvider, GridField_ActionProvider
 
         if ($this->publish) {
             $list->each(function ($item) {
-                if ($item->hasExtension('Versioned')) {
+                if ($item->hasExtension(Versioned::class)) {
                     $item->writeToStage('Stage');
-                    $item->copyVersionToStage('Stage', 'Live');
+
+                    if (!$item->stagesDiffer()) {
+                        $item->copyVersionToStage('Stage', 'Live');
+                    }
                 }
             });
         }
