@@ -1,15 +1,14 @@
 <?php
 
-
 namespace A2nt\CMSNiceties\Extensions;
 
-use gorriecoe\Embed\Extensions\Embeddable;
+use Sheadawson\Linkable\Forms\EmbeddedObjectField;
 use SilverStripe\Forms\CheckboxField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\LiteralField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 
-class EmbedObjectField extends Embeddable
+class EmbedObjectField extends EmbeddedObjectField
 {
     /**
      * List the allowed included embed types.  If null all are allowed.
@@ -30,10 +29,9 @@ class EmbedObjectField extends Embeddable
      * @param array $properties
      * @return mixed|DBHTMLText
      */
-    /*public function FieldHolder($properties = [])
+    public function FieldHolder($properties = [])
     {
         $name = $this->getName();
-
         $fields = [
             CheckboxField::create(
                 $name . '[autoplay]',
@@ -57,5 +55,5 @@ class EmbedObjectField extends Embeddable
                 parent::FieldHolder($properties)
             )
         ], $fields));
-    }*/
+    }
 }

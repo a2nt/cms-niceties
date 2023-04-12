@@ -137,7 +137,7 @@ class WebpackTemplateProvider implements TemplateGlobalProvider
     public static function toPublicPath($path): string
     {
         $cfg = self::config();
-        if (strpos($path, '//')) {
+        if (strpos($path, '//') || strpos($path, '/')) {
             return $path;
         }
 
