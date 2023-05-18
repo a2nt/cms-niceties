@@ -63,7 +63,7 @@ class OpenningHoursExtension extends DataExtension
     {
         $tab = $fields->findOrMakeTab('Root.OpeningHours');
 
-        if(!$this->owner->exists()) {
+        if (!$this->owner->exists()) {
             $tab->push(LiteralField::create(
                 'OpeningHoursNotice',
                 '<p class="message notice">The object must be saved before opening hours can be added</p>'
@@ -84,12 +84,12 @@ class OpenningHoursExtension extends DataExtension
         ]);
 
         $tab->setChildren(FieldList::create(
-            HeaderField::create('OpeningHours','Opening Hours'),
+            HeaderField::create('OpeningHours', 'Opening Hours'),
             LiteralField::create(
                 'CurrentOpeningHour',
                 '<b>Today:</b>'
                 .'<p class="message notice">'
-                .$this->owner->renderWith('App\\Objects\\OpeningHoursList')
+                .$this->owner->renderWith('A2nt\\CMSNiceties\\Objects\\OpeningHoursList')
                 .'</p>'
             ),
             CheckboxField::create('ShowOpeningHours'),
@@ -98,7 +98,7 @@ class OpenningHoursExtension extends DataExtension
                 'Opening Hours Page',
                 SiteTree::get()->map()->toArray()
             ),
-            /*TextareaField::create('OpenningHoursNote'),
+            TextareaField::create('OpenningHoursNoteText'),
             LiteralField::create(
                 'OpeningHoursNote',
                 '<p><b>Please, specify time ranges. For example:</b><br/>'
@@ -110,7 +110,7 @@ class OpenningHoursExtension extends DataExtension
                 .'<b>Short day example durring holidays:</b><br/>'
                 .'Monday 12:00 AM - 2:00 PM 12/31/2018 - 01/06/2019'
                 .'</p>'
-            ),*/
+            ),
             GridField::create(
                 'OpeningHours',
                 'Opening Hours',
