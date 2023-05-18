@@ -98,9 +98,9 @@ class OpenningHoursExtension extends DataExtension
                 'Opening Hours Page',
                 SiteTree::get()->map()->toArray()
             ),
-            TextareaField::create('OpenningHoursNoteText'),
+            TextareaField::create('OpenningHoursNote'),
             LiteralField::create(
-                'OpeningHoursNote',
+                'OpeningHoursDescription',
                 '<p><b>Please, specify time ranges. For example:</b><br/>'
                 .'Monday 10:00 AM - 2:00 PM<br/>'
                 .'Monday 3:00 PM - 6:00 PM<br/>'
