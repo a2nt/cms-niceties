@@ -128,6 +128,13 @@ class OpenningHoursExtension extends DataExtension
         ));
     }
 
+    public function HolidayToday()
+    {
+        $today = date('Y-m-d', time());
+        $holiday = Holiday::get()->filter('Date', $today);
+        return $holiday->exists() ? $holiday->first() : null;
+    }
+
     /**
      * Get the opening hours
      *
