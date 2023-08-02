@@ -3,6 +3,7 @@
 use SilverStripe\Forms\HTMLEditor\HtmlEditorConfig;
 use SilverStripe\Core\Manifest\ModuleResourceLoader;
 use SilverStripe\ORM\Search\FulltextSearchable;
+
 /*use SilverStripe\View\Parsers\ShortcodeParser;
 use A2nt\CMSNiceties\Extensions\EmbedShortcodeProvider;*/
 
@@ -16,9 +17,9 @@ $config->enablePlugins([
     'charmap',
     'visualblocks',
     'lists',
-    'charcount' => ModuleResourceLoader::resourceURL(
+    /*'charcount' => ModuleResourceLoader::resourceURL(
         'drmartingonzo/ss-tinymce-charcount:client/dist/js/bundle.js'
-    ),
+    ),*/
 ]);
 $config->addButtonsToLine(2, 'hr');
 $config->setOption('block_formats', 'Paragraph=p;Heading 2=h2;Heading 3=h3;Heading 4=h4;Heading 5=h5;Heading 6=h6;Address=address;Pre=pre');
