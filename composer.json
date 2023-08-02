@@ -16,7 +16,6 @@
         "silverstripe/cms": "^4",
         "a2nt/silverstripe-elemental-basics": "*",
         "silverstripe/widgets": "*",
-        "drmartingonzo/ss-tinymce-charcount": "*",
         "gorriecoe/silverstripe-embed": "*",
         "gorriecoe/silverstripe-linkfield": "*"
     },
