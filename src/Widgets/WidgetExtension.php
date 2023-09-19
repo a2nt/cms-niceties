@@ -23,6 +23,7 @@ class WidgetExtension extends DataExtension
 
     public function updateCMSFields(FieldList $fields)
     {
+        $obj = $this->owner;
         parent::updateCMSFields($fields);
         // Add a combined field for "Title" and "Displayed" checkbox in a Bootstrap input group
         $fields->removeByName('ShowTitle');
