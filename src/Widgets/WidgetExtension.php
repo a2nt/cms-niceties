@@ -1,14 +1,13 @@
 <?php
 
-
 namespace A2nt\CMSNiceties\Widgets;
-
 
 use DNADesign\Elemental\Forms\TextCheckboxGroupField;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\Forms\LiteralField;
 
 /**
  * Class \A2nt\CMSNiceties\Widgets\WidgetExtension
@@ -32,8 +31,21 @@ class WidgetExtension extends DataExtension
             TextCheckboxGroupField::create()
                 ->setName('Title')
         );
-        $fields->push(TreeDropdownField::create(
-            'MovePageID', 'Move widget to page', SiteTree::class
+
+        if ($this->owner->ID) {
+            $fields->push(TreeDropdownField::create(
+                'MovePageID',
+                'Move widget to page',
+                SiteTree::class
+            ));
+        }
+
+        $fields->push(LiteralField::create(
+            'ClassName',
+            '<div class="form-group field text">'
+            .'<div class="form__field-label">Class</div>'
+            .'<div class="form__field-holder">'.$obj->getField('ClassName').'</div>'
+            .'</div>'
         ));
     }
 
@@ -43,9 +55,9 @@ class WidgetExtension extends DataExtension
         $moveID = $obj->MovePageID;
         if ($moveID) {
             $page = \Page::get()->byID($moveID);
-            if($page) {
+            if ($page) {
                 $sidebarID = $page->getField('SideBarID');
-                if($sidebarID) {
+                if ($sidebarID) {
                     $obj->setField('ParentID', $sidebarID);
                 }
             }
