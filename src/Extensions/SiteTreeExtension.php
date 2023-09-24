@@ -2,6 +2,7 @@
 
 namespace A2nt\CMSNiceties\Extensions;
 
+use A2nt\ElementalBasics\Elements\SidebarElement;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
@@ -38,6 +39,28 @@ class SiteTreeExtension extends DataExtension
             $fields->dataFieldByName('Title')->setTitle($f->Title());
             $fields->removeByName('MenuTitle');
         }
+    }
+
+    public function ShowSidebar()
+    {
+        $obj = $this->owner;
+
+        if ($obj->ElementalArea()->Elements()->find('ClassName', SidebarElement::class)->first()) {
+            return false;
+        }
+
+        if ($obj->SideBarContent) {
+            return true;
+        }
+        if (method_exists($obj, 'SideBarView')) {
+            $view = $obj->SideBarView();
+
+            if ($view && $view->Widgets()->count()) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function onBeforeWrite()
