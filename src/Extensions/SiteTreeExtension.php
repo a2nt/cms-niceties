@@ -44,8 +44,20 @@ class SiteTreeExtension extends DataExtension
     public function ShowSidebar()
     {
         $obj = $this->owner;
+        $area = $obj->ElementalArea();
+        if(!$area) {
+            return true;
+        }
+        $els = $area->Elements();
+        if(!$els) {
+            return true;
+        }
+        $els = $els->find('ClassName', SidebarElement::class);
+        if(!$els) {
+            return true;
+        }
 
-        if ($obj->ElementalArea()->Elements()->find('ClassName', SidebarElement::class)->first()) {
+        if ($els->first()) {
             return false;
         }
 
