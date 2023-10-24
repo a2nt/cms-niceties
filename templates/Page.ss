@@ -16,7 +16,10 @@
         </header>
 
         <main id="MainContent" class="page-content" data-ajax-region="LayoutAjax">
-            <% include MainContent Layout=$Layout %>
+            <% if $isFormResponse %>
+                <%-- Legacy code compatibility --%>
+                <% include MainContent Layout=$Layout %>
+            <% end_if %>
         </main>
     </div>
 
