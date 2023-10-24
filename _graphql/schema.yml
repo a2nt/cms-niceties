@@ -1,0 +1,4 @@
+queries:
+  readMenu:
+    type: '[PageInterface]'
+    resolver: [ 'A2nt\CMSNiceties\GraphQL\MenuResolver', 'resolveMenu' ]

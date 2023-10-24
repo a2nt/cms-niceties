@@ -7,6 +7,8 @@ use SilverStripe\Core\Extension;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TextField;
+use SilverStripe\Forms\TextareaField;
+use SilverStripe\Forms\FormField;
 
 /**
  * Class \A2nt\CMSNiceties\Extensions\PlaceholderFormExtension
@@ -24,7 +26,7 @@ class PlaceholderFormExtension extends Extension
 
     private function setPlaceholder($field)
     {
-        if (is_a($field, TextField::class)) {
+        if (is_a($field, TextField::class) || is_a($field, TextareaField::class)) {
             if (!$field->getAttribute('placeholder')) {
                 $placeholder = $field->Title() .($field->hasClass('requiredField') ? '*' : '');
 

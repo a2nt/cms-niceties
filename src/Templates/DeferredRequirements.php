@@ -36,7 +36,19 @@ class DeferredRequirements implements TemplateGlobalProvider
             'DeferedJS' => 'loadJS',
             'WebpackActive' => 'webpackActive',
             'EmptyImgSrc' => 'emptyImageSrc',
+            'HttpMethod' => 'httpMethod',
         ];
+    }
+
+    public static function httpMethod(): string
+    {
+        $ctl = Controller::curr();
+        if (!$ctl) {
+            return null;
+        }
+
+        $req = $ctl->getRequest();
+        return ($req) ? $req->httpMethod() : null;
     }
 
     public static function Auto($class = false): string
