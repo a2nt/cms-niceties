@@ -39,7 +39,7 @@ class ObjectGraphQlEx extends DataExtension
     public function isFormResponse()
     {
         $curr = Controller::curr();
-        $req = $this->getRequest();
+        $req = $curr->getRequest();
 
         return $req->requestVar('SecurityID') || $req->httpMethod() === 'POST';
     }
