@@ -17,7 +17,7 @@ class ObjectGraphQlEx extends DataExtension
     // Get rendered template
     public function MainContent()
     {
-        $object = $this;
+        $object = $this->owner;
         return isset($object->GraphQLContent) ? $object->GraphQLContent : null;
     }
 

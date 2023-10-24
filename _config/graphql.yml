@@ -26,7 +26,7 @@ SilverStripe\GraphQL\Schema\Schema:
         max_query_complexity: 200 # default unlimited
     default:
       src:
-        - app/_graphql
+        - vendor/a2nt/cms-niceties/_graphql
 
 SilverStripe\GraphQLDevTools\Controller:
   # show two schemas
