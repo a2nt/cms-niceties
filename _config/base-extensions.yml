@@ -53,3 +53,4 @@ Page:
     - A2nt\CMSNiceties\Models\TeamMember
   extensions:
     - DNADesign\Elemental\Extensions\ElementalPageExtension
+    - ObjectGraphQlEx
