@@ -1,6 +1,6 @@
 <?php
 
-namespace A2nt\CMSNiceties\Extensions;
+namespace A2nt\CMSNiceties\GraphQL;
 
 use SilverStripe\Control\Controller;
 use SilverStripe\GraphQL\Controller as GraphQLController;
@@ -34,5 +34,13 @@ class ObjectGraphQlEx extends DataExtension
         }
 
         return null;
+    }
+
+    public function isFormResponse()
+    {
+        $curr = Controller::curr();
+        $req = $this->getRequest();
+
+        return $req->requestVar('SecurityID') || $req->httpMethod() === 'POST';
     }
 }

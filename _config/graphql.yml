@@ -35,3 +35,8 @@ SilverStripe\GraphQLDevTools\Controller:
     - admin
   # default schema that is selected
   default_schema: default
+
+
+Page:
+  extensions:
+    - A2nt\CMSNiceties\GraphQL\ObjectGraphQlEx
