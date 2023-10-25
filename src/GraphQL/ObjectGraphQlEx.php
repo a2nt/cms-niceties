@@ -2,17 +2,17 @@
 
 namespace A2nt\CMSNiceties\GraphQL;
 
+use A2nt\CMSNiceties\Templates\DeferredRequirements;
 use SilverStripe\Control\Controller;
 use SilverStripe\GraphQL\Controller as GraphQLController;
-use App\GraphQL\URLLinkablePlugin;
-use SilverStripe\ORM\DataExtension;
+use SilverStripe\Core\Extension;
+use SilverStripe\View\Requirements;
 
 /**
- * Class \A2nt\CMSNiceties\Extensions\SubmittedFormEx
+ * Class \A2nt\CMSNiceties\GraphQL\ObjectGraphQlEx
  *  AJAX/GraphQL helpers
- * @property \A2nt\CMSNiceties\Extensions\SubmittedFormEx $owner
  */
-class ObjectGraphQlEx extends DataExtension
+class ObjectGraphQlEx extends Extension
 {
     // Get rendered template
     public function MainContent()
@@ -21,15 +21,36 @@ class ObjectGraphQlEx extends DataExtension
         return isset($object->GraphQLContent) ? $object->GraphQLContent : null;
     }
 
+    public function Resources()
+    {
+        $object = $this->owner;
+        $res = $object->config()->get('graphql_resources');
+        return $res ? json_encode($res) : null;
+    }
+
     public function RequestLink()
     {
         $curr = Controller::curr();
+        $req = $curr->getRequest();
+
         //$var = URLLinkablePlugin::config()->get('single_field_name');
         $var = 'url';
         if ($curr::class === GraphQLController::class) {
             $vars = json_decode($curr->getRequest()->getBody(), true)['variables'];
             if (isset($vars[$var])) {
-                return $vars[$var];
+                $link = $vars[$var];
+
+                if ($req->requestVar('SecurityID')) {
+                    $urlArray = explode('/', $link);
+                    $urlArray = array_filter($urlArray);
+
+                    // remove last element
+                    array_pop($urlArray);
+
+                    $link = '/'.implode('/', $urlArray).'/';
+                }
+
+                return $link;
             }
         }
 

@@ -9,6 +9,8 @@ use SilverStripe\Forms\TextareaField;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
 
+use TractorCow\Fluent\Extension\FluentSiteTreeExtension;
+
 /**
  * Class \A2nt\CMSNiceties\Extensions\SiteTreeExtension
  *
@@ -137,5 +139,12 @@ class SiteTreeExtension extends DataExtension
         // h1 page title and navigation label should be equal for SEO
         $obj = $this->owner;
         $obj->setField('MenuTitle', $obj->getField('Title'));
+
+        if (class_exists(FluentSiteTreeExtension::class) && ! $obj->isDraftedInLocale() && $obj->isInDB()) {
+            $elementalArea = $obj->ElementalArea();
+
+            $elementalAreaNew = $elementalArea->duplicate();
+            $obj->setField('ElementalAreaID', $elementalAreaNew->ID);
+        }
     }
 }
