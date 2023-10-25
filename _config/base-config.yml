@@ -4,9 +4,6 @@ Name: a2nt-cms-niceties-base-config
 SilverStripe\Core\Manifest\ModuleManifest:
   project: app
 
-Page:
-  default_container_class: 'container'
-
 #SilverStripe\Admin\LeftAndMain:
 #  extra_requirements_javascript:
 #    - 'colymba/gridfield-bulk-editing-tools:client/dist/js/main.js'

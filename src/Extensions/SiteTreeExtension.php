@@ -3,6 +3,8 @@
 namespace A2nt\CMSNiceties\Extensions;
 
 use A2nt\ElementalBasics\Elements\SidebarElement;
+use DNADesign\Elemental\Models\ElementContent;
+use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Forms\TextareaField;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\Forms\FieldList;
@@ -15,6 +17,7 @@ use SilverStripe\Forms\FieldList;
  */
 class SiteTreeExtension extends DataExtension
 {
+    protected $_cached = [];
     private static $db = [
         'ExtraCode' => 'Text',
     ];
@@ -45,15 +48,15 @@ class SiteTreeExtension extends DataExtension
     {
         $obj = $this->owner;
         $area = $obj->ElementalArea();
-        if(!$area) {
+        if (!$area) {
             return true;
         }
         $els = $area->Elements();
-        if(!$els) {
+        if (!$els) {
             return true;
         }
         $els = $els->find('ClassName', SidebarElement::class);
-        if(!$els) {
+        if (!$els) {
             return true;
         }
 
@@ -73,6 +76,58 @@ class SiteTreeExtension extends DataExtension
         }
 
         return false;
+    }
+
+    public static function DefaultContainer()
+    {
+        return SiteTree::config()->get('default_container_class');
+    }
+
+    /*
+     * Shows custom summary of the post, otherwise
+     * Displays summary of the first content element
+     */
+    public function Summary($wordsToDisplay = 30)
+    {
+        $obj = $this->owner;
+        if (isset($this->_cached['summary' . $wordsToDisplay])) {
+            return $this->_cached['summary' . $wordsToDisplay];
+        }
+
+        $summary = $obj->getField('Summary');
+        if ($summary) {
+            $this->_cached['summary' . $wordsToDisplay] = $summary;
+
+            return $this->_cached['summary' . $wordsToDisplay];
+        }
+
+        $element = ElementContent::get()->filter([
+            'ParentID' => $obj->ElementalArea()->ID,
+            'HTML:not' => [null],
+        ])->first();
+
+        if ($element) {
+            $this->_cached['summary' . $wordsToDisplay] = $element->dbObject('HTML')->Summary($wordsToDisplay);
+
+            return $this->_cached['summary' . $wordsToDisplay];
+        }
+
+        $content = $obj->getField('Content');
+        if ($content) {
+            $this->_cached['summary' . $wordsToDisplay] = $obj->dbObject('Content')->Summary($wordsToDisplay);
+
+            return $this->_cached['summary' . $wordsToDisplay];
+        }
+
+        $this->_cached['summary' . $wordsToDisplay] = false;
+
+        return $this->_cached['summary' . $wordsToDisplay];
+    }
+
+    public function CSSClass()
+    {
+        $obj = $this->owner;
+        return str_replace(['\\'], '-', $obj->getField('ClassName'));
     }
 
     public function onBeforeWrite()

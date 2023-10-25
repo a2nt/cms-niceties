@@ -12,7 +12,12 @@ SilverStripe\SiteConfig\SiteConfig:
     - A2nt\CMSNiceties\Extensions\SiteConfigExtension
     - A2nt\CMSNiceties\Extensions\NotificationsExtension
 
+PageController:
+  extensions:
+    - A2nt\CMSNiceties\Extensions\PageControllerEx
+
 SilverStripe\CMS\Model\SiteTree:
+  default_container_class: 'container'
   extensions:
     - A2nt\CMSNiceties\Extensions\SiteTreeExtension
 
