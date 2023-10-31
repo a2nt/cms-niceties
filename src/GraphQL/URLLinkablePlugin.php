@@ -10,6 +10,7 @@ use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Config\Configurable;
 use SilverStripe\Core\Injector\Injectable;
 use SilverStripe\Dev\Debug;
+use SilverStripe\ErrorPage\ErrorPage;
 use SilverStripe\GraphQL\Controller;
 use SilverStripe\GraphQL\Schema\Field\ModelQuery;
 use SilverStripe\GraphQL\Schema\Interfaces\ModelQueryPlugin;
@@ -111,7 +112,7 @@ class URLLinkablePlugin implements ModelQueryPlugin
         }
 
         $url = $linkData;
-        if ($url === '/') {
+        if (!$url || $url === '/') {
             return '/home';
         }
 
@@ -173,7 +174,7 @@ class URLLinkablePlugin implements ModelQueryPlugin
     }
 
     // AJAX/GraphQL helper
-    protected static function RenderTemplate($page, $ctl)
+    protected static function RenderTemplate(&$page, $ctl)
     {
         $object = $page;
         $req = $ctl->getRequest();
@@ -187,33 +188,14 @@ class URLLinkablePlugin implements ModelQueryPlugin
 
         $action = ($action === 'handleAction') ? $actionParam : $action;
 
+        if ($action && !$ctl->hasAction($action)) {
+            return self::RenderNotFound($object);
+        }
+
         $action = $action && $ctl->hasAction($action) ? $action : 'index';
 
 
-        // find templates
-        $tpl = 'Page';
-        $tpls = SSViewer::get_templates_by_class($object->ClassName, '', \Page::class);
-
-        foreach ($tpls as $tpl) {
-            if (is_array($tpl)) {
-                continue;
-            }
-
-            $a_tpl = explode('\\', $tpl);
-            $last_name = array_pop($a_tpl);
-            $a_tpl[] = 'Layout';
-            $a_tpl[] = $last_name;
-            $a_tpl = implode('\\', $a_tpl);
-
-            if (SSViewer::hasTemplate($a_tpl)) {
-                $tpl = $a_tpl;
-                break;
-            }
-        }
-        //
-
-        $tpl = is_array($tpl) ? 'Page' : $tpl;
-        $tpl = ($tpl !== 'Page') ? $tpl : 'Layout/Page';
+        $tpl = self::findTemplates($object);
 
         // a little dirty way to make forms working
         Controller::curr()->config()->set('url_segment', $object->AbsoluteLink());
@@ -268,5 +250,52 @@ class URLLinkablePlugin implements ModelQueryPlugin
             $handlerClass = get_parent_class($handlerClass ?? '');
         }
         return null;
+    }
+
+    protected static function findTemplates($object)
+    {
+        // find templates
+        $tpl = 'Page';
+        $tpls = SSViewer::get_templates_by_class($object->ClassName, '', \Page::class);
+
+        foreach ($tpls as $tpl) {
+            if (is_array($tpl)) {
+                continue;
+            }
+
+            $a_tpl = explode('\\', $tpl);
+            $last_name = array_pop($a_tpl);
+            $a_tpl[] = 'Layout';
+            $a_tpl[] = $last_name;
+            $a_tpl = implode('\\', $a_tpl);
+
+            if (SSViewer::hasTemplate($a_tpl)) {
+                $tpl = $a_tpl;
+                break;
+            }
+        }
+        //
+
+        $tpl = is_array($tpl) ? 'Page' : $tpl;
+        $tpl = ($tpl !== 'Page') ? $tpl : 'Layout/Page';
+
+        return $tpl;
+    }
+
+    protected static function RenderNotFound(&$page)
+    {
+        $error = ErrorPage::get()->filter('ErrorCode', 404)->first();
+        if (!$error) {
+            $page->Title = 'Not Found';
+            return 'Not Found';
+        }
+
+        $page = $error;
+        $tpl = self::findTemplates($error);
+        $layout = $error->renderWith($tpl);
+
+        return $error
+            ->customise(['Layout' => $layout])
+            ->renderWith('GraphQLPage');
     }
 }
