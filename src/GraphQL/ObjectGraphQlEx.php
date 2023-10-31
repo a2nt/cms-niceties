@@ -62,6 +62,7 @@ class ObjectGraphQlEx extends Extension
         $curr = Controller::curr();
         $req = $curr->getRequest();
 
-        return $req->requestVar('SecurityID') || $req->httpMethod() === 'POST';
+        // TODO: GraphQL form response /element/*id*/action
+        return $req->requestVar('SecurityID') || $req->httpMethod() === 'POST' || preg_match('!element/([0-9]+)/([A-z]+)!', $req->getURL());
     }
 }

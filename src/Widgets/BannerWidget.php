@@ -1,6 +1,5 @@
 <?php
 
-
 namespace A2nt\CMSNiceties\Widgets;
 
 use gorriecoe\Link\Models\Link;
@@ -31,12 +30,12 @@ class BannerWidget extends Widget
 
     private static $has_one = [
         'Image' => Image::class,
-        'Link' => Link::class,
+        'Linked' => Link::class,
     ];
 
     private static $owns = [
         'Image',
-        'Link',
+        'Linked',
     ];
 
     public function getCMSFields()
@@ -46,7 +45,7 @@ class BannerWidget extends Widget
         $fields->push(UploadField::create('Image', 'Image (minimal width 301px)')
                 ->setAllowedFileCategories(['image/supported']));
 
-        $fields->push(LinkField::create('Link', 'Link', $this));
+        $fields->push(LinkField::create('Linked', 'Link', $this));
 
         return $fields;
     }
@@ -63,12 +62,12 @@ class BannerWidget extends Widget
 
     public function onBeforeWrite()
     {
-    	$title = $this->getField('Title');
-    	$img = $this->Image();
-    	if(!$title && $img) {
-    		$this->setField('Title', $img->getTitle());
-	    }
+        $title = $this->getField('Title');
+        $img = $this->Image();
+        if(!$title && $img) {
+            $this->setField('Title', $img->getTitle());
+        }
 
-	    parent::onBeforeWrite();
+        parent::onBeforeWrite();
     }
 }
