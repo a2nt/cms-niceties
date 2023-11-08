@@ -187,8 +187,11 @@ class URLLinkablePlugin implements ModelQueryPlugin
         $action = $match['action'];
 
         $action = ($action === 'handleAction') ? $actionParam : $action;
-
-        if ($action && !$ctl->hasAction($action)) {
+        if (
+            $action
+            && $req->param('Action') !== $action
+            && !$ctl->hasAction($action)
+        ) {
             return self::RenderNotFound($object);
         }
 
