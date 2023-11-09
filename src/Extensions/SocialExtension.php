@@ -58,10 +58,16 @@ class SocialExtension extends DataExtension
     {
         parent::updateCMSFields($fields);
 
+        $nwfieldsList = array_keys(self::$has_one);
+        foreach ($nwfieldsList as $k) {
+            $fields->removeByName($k.'ID');
+        }
+
         $cfg = [
-            'types' => [
-                'URL',
-            ],
+             'title_display' => false,
+             'types' => [
+                 'URL',
+             ],
         ];
 
         $linkFields = [
@@ -71,7 +77,7 @@ class SocialExtension extends DataExtension
             LinkField::create('Instagram', 'Instagram', $this->owner, $cfg),
             LinkField::create('Twitter', 'Twitter', $this->owner, $cfg),
             LinkField::create('YouTube', 'YouTube', $this->owner, $cfg),
-            LinkField::create('Tiktok', 'Tiktok' , $this->owner, $cfg),
+            LinkField::create('Tiktok', 'Tiktok', $this->owner, $cfg),
         ];
 
         $fields->findOrMakeTab('Root.Social');
