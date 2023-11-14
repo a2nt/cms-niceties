@@ -28,7 +28,7 @@ class PlaceholderFormExtension extends Extension
     {
         if (is_a($field, TextField::class) || is_a($field, TextareaField::class)) {
             if (!$field->getAttribute('placeholder')) {
-                $placeholder = $field->Title() .($field->hasClass('requiredField') ? '*' : '');
+                $placeholder = $field->Title();
 
                 if (!Config::inst()->get(\get_class($this->owner), 'no_placeholders')) {
                     $field->setAttribute(
