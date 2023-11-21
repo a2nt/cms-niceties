@@ -16,12 +16,12 @@
             <% include Header %>
         </header>
 
-        <main id="MainContent" class="page-content" data-ajax-region="LayoutAjax">
+        <div id="MainContent" class="page-content" data-ajax-region="LayoutAjax">
             <% if $isFormResponse %>
                 <%-- Legacy code compatibility --%>
                 <% include MainContent Layout=$Layout %>
             <% end_if %>
-        </main>
+        </div>
     </div>
 
     <footer id="Footer" class="site-footer footer">
