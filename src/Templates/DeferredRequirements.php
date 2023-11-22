@@ -165,7 +165,7 @@ class DeferredRequirements implements TemplateGlobalProvider
     {
         $external = (mb_strpos($css, '//') === 0 || mb_strpos($css, 'http') === 0);
         //if (self::getDeferred() && !self::webpackActive()) {
-        if ($external) {
+        if ((self::getDeferred() && !self::webpackActive()) || $external) {
             self::$css[] = $css;
         } else {
             WebpackTemplateProvider::loadCSS(self::get_url($css));
