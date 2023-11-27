@@ -103,6 +103,10 @@ class SiteTreeExtension extends DataExtension
             return $this->_cached['summary' . $wordsToDisplay];
         }
 
+        if(!method_exists($obj, 'ElementalArea')) {
+            return;
+        }
+
         $element = ElementContent::get()->filter([
             'ParentID' => $obj->ElementalArea()->ID,
             'HTML:not' => [null],

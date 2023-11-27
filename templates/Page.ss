@@ -16,8 +16,8 @@
             <% include Header %>
         </header>
 
-        <div id="MainContent" class="page-content" data-ajax-region="LayoutAjax">
-            <% if $isFormResponse %>
+        <div id="MainContent" class="page-content" data-ajax-region="LayoutAjax"<% if $isLegacy %> data-legacy="true"<% end_if %>>
+            <% if $isFormResponse || $isLegacy %>
                 <%-- Legacy code compatibility --%>
                 <% include MainContent Layout=$Layout %>
             <% end_if %>
