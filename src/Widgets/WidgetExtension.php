@@ -4,6 +4,7 @@ namespace A2nt\CMSNiceties\Widgets;
 
 use DNADesign\Elemental\Forms\TextCheckboxGroupField;
 use SilverStripe\CMS\Model\SiteTree;
+use SilverStripe\Control\Director;
 use SilverStripe\Forms\FieldList;
 use SilverStripe\Forms\TreeDropdownField;
 use SilverStripe\ORM\DataExtension;
@@ -33,7 +34,7 @@ class WidgetExtension extends DataExtension
                 ->setName('Title')
         );
 
-        if ($this->owner->ID) {
+        if ($obj->ID) {
             $fields->push(TreeDropdownField::create(
                 'MovePageID',
                 'Move widget to page',
@@ -42,10 +43,10 @@ class WidgetExtension extends DataExtension
         }
 
         $fields->push(LiteralField::create(
-            'ClassName',
+            'Type',
             '<div class="form-group field text">'
-            .'<div class="form__field-label">Class</div>'
-            .'<div class="form__field-holder">'.$obj->getField('ClassName').'</div>'
+            .'<div class="form__field-label">Type</div>'
+            .'<div class="form__field-holder">'.(!Director::isLive() ? $obj->getField('ClassName') : $obj->i18n_singular_name()).'</div>'
             .'</div>'
         ));
     }
