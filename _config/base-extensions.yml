@@ -58,3 +58,7 @@ Page:
     - A2nt\CMSNiceties\Models\TeamMember
   extensions:
     - DNADesign\Elemental\Extensions\ElementalPageExtension
+
+SilverStripe\CMS\Model\RedirectorPage:
+  extensions:
+    - A2nt\CMSNiceties\Extensions\RedirectorPageEx
