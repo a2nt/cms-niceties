@@ -2,11 +2,11 @@
 
 namespace A2nt\CMSNiceties\GraphQL;
 
-use A2nt\CMSNiceties\Templates\DeferredRequirements;
+use SilverStripe\CMS\Model\RedirectorPage;
 use SilverStripe\Control\Controller;
 use SilverStripe\GraphQL\Controller as GraphQLController;
 use SilverStripe\Core\Extension;
-use SilverStripe\View\Requirements;
+use SilverStripe\ErrorPage\ErrorPage;
 
 /**
  * Class \A2nt\CMSNiceties\GraphQL\ObjectGraphQlEx
@@ -70,9 +70,12 @@ class ObjectGraphQlEx extends Extension
     {
         $object = $this->owner;
 
-        return $object->config()->get('legacy') || in_array($object->ClassName, [
-            RedirectorPage::class,
-            ErrorPage::class,
-        ]);
+        return $object->config()->get('legacy') || in_array(
+            $object->ClassName,
+            [
+                RedirectorPage::class,
+                ErrorPage::class,
+            ]
+        );
     }
 }
