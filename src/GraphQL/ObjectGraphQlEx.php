@@ -65,4 +65,14 @@ class ObjectGraphQlEx extends Extension
         // TODO: GraphQL form response /element/*id*/action
         return $req->requestVar('SecurityID') || $req->httpMethod() === 'POST' || preg_match('!element/([0-9]+)/([A-z]+)!', $req->getURL());
     }
+
+    public function isLegacy()
+    {
+        $object = $this->owner;
+
+        return $object->config()->get('legacy') || in_array($object->ClassName, [
+            RedirectorPage::class,
+            ErrorPage::class,
+        ]);
+    }
 }
