@@ -18,6 +18,7 @@ use SilverStripe\GraphQL\Schema\Schema;
 use SilverStripe\ORM\ArrayList;
 use SilverStripe\View\ArrayData;
 use SilverStripe\View\SSViewer;
+use SilverStripe\View\ViewableData;
 
 if (!interface_exists(ModelQueryPlugin::class)) {
     return;
@@ -219,7 +220,7 @@ class URLLinkablePlugin implements ModelQueryPlugin
 
     protected static function findAction($controller, $request)
     {
-        $handlerClass = $controller::class;
+        $handlerClass = get_class($controller);
 
         // We stop after RequestHandler; in other words, at ViewableData
         while ($handlerClass && $handlerClass != ViewableData::class) {

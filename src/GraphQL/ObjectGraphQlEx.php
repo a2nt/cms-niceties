@@ -35,7 +35,7 @@ class ObjectGraphQlEx extends Extension
 
         //$var = URLLinkablePlugin::config()->get('single_field_name');
         $var = 'url';
-        if ($curr::class === GraphQLController::class) {
+        if (get_class($curr) === GraphQLController::class) {
             $vars = json_decode($curr->getRequest()->getBody(), true)['variables'];
             if (isset($vars[$var])) {
                 $link = $vars[$var];
