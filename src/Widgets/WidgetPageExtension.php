@@ -1,10 +1,10 @@
 <?php
 
-
 namespace A2nt\CMSNiceties\Widgets;
 
 use DNADesign\Elemental\Forms\ElementalAreaField;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\LiteralField;
 use SilverStripe\Widgets\Forms\WidgetAreaEditor;
 use SilverStripe\Widgets\Model\Widget;
 use SilverStripe\Widgets\Model\WidgetArea;
@@ -33,9 +33,10 @@ class WidgetPageExtension extends \SilverStripe\Widgets\Extensions\WidgetPageExt
             $available[get_class($type)] = $type->getCMSTitle();
         }
 
+        $w = $this->owner->Sidebar();
         $tab->push(WidgetAreaField::create(
             'SideBar',
-            $this->owner->Sidebar(),
+            $w,
             $available
         ));
     }
@@ -44,11 +45,14 @@ class WidgetPageExtension extends \SilverStripe\Widgets\Extensions\WidgetPageExt
     {
         parent::onBeforeWrite();
 
-        if (!$this->owner->getField('SideBarID')) {
+        $obj = $this->owner;
+        $w = $obj->SideBar();
+
+        if (!$w->ID || !$obj->getField('SideBarID')) {
             $area = WidgetArea::create();
             $area->write();
 
-            $this->owner->setField('SideBarID', $area->ID);
+            $obj->setField('SideBarID', $area->ID);
         }
     }
 }
