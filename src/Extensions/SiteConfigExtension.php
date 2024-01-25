@@ -53,6 +53,7 @@ class SiteConfigExtension extends DataExtension
         'State' => 'Varchar(255)',
         'Country' => 'Varchar(255)',
         'ZipCode' => 'Varchar(6)',
+        'AddressExtra' => 'Text',
     ];
 
     private static $has_one = [
@@ -102,7 +103,7 @@ class SiteConfigExtension extends DataExtension
         $mapTab->setTitle('Address / Map');
 
 
-        $addrFields =[
+        $addrFields = [
             TextField::create('Address'),
             TextField::create('ZipCode'),
             TextField::create('Suburb', 'City'),
@@ -135,6 +136,8 @@ class SiteConfigExtension extends DataExtension
             $addrFields[] = TextField::create('State');
             $addrFields[] = TextField::create('Country');
         }
+
+        $addrFields[] = TextareaField::create('AddressExtra', 'Address Extra Lines');
 
 
         $fields->addFieldsToTab('Root.Maps', $addrFields);
