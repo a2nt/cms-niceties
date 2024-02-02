@@ -45,6 +45,8 @@ SilverStripe\Core\Injector\Injector:
     class: A2nt\CMSNiceties\Forms\GridField\GridFieldConfig_RecordEditor
   SilverStripe\Forms\GridField\GridFieldConfig_RelationEditor:
     class: A2nt\CMSNiceties\Forms\GridField\GridFieldConfig_RelationEditor
+  SilverStripe\Forms\FormRequestHandler:
+    class: A2nt\CMSNiceties\Ajax\AjaxFormRequestHandler
 
 SilverStripe\UserForms\Form\UserForm:
   extensions:
