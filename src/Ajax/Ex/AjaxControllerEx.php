@@ -7,6 +7,7 @@ use SilverStripe\Control\Director;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Core\Extension;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Forms\Form;
 use SilverStripe\Security\MemberAuthenticator\MemberAuthenticator;
 use SilverStripe\Security\Security;
 use SilverStripe\View\SSViewer;
@@ -24,12 +25,23 @@ class AjaxControllerEx extends Extension
         'passwordsent',
     ];
 
+    private static function _makeAllFieldsRequired(Form $form)
+    {
+        $fields = $form->Fields();
+        foreach ($fields as $f) {
+            $f
+                ->setAttribute('required', 'required')
+                ->addExtraClass('required');
+        }
+    }
+
     public function LoginFormEx()
     {
         $ctrl = $this->owner;
 
         /* @var Form $form */
         $form = $ctrl->LoginForm();
+        self::_makeAllFieldsRequired($form);
 
         //$form->addExtraClass('ajax-form');
         $form->setLegend('Sign in to your service account');
@@ -52,6 +64,7 @@ class AjaxControllerEx extends Extension
             ->getLostPasswordHandler($ctrl->Link())
             ->lostPasswordForm();
 
+        self::_makeAllFieldsRequired($form);
         $form->addExtraClass('ajax-form');
         $form->setLegend('Restore your password');
 
