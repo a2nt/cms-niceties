@@ -7,6 +7,7 @@ use SilverStripe\Control\Director;
 use SilverStripe\Core\Extension;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\Form;
+use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\Security\MemberAuthenticator\MemberAuthenticator;
 use SilverStripe\Security\Security;
 use SilverStripe\View\SSViewer;
@@ -155,7 +156,9 @@ class AjaxControllerEx extends Extension
             'CSSClass' => $ctrl->CSSClass(),
             'Resources' => $resources,
             'RequestLink' => $url,
-            'MainContent' => $response->getBody(),
+            'MainContent' => $ctrl->customise([
+                'Layout' => DBHTMLText::create()->setValue($response->getBody()),
+            ])->renderWith('Includes/MainContent')->RAW(),
         ]));
     }
 }
