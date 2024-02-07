@@ -94,7 +94,8 @@ class AjaxControllerEx extends Extension
 
         self::_processFields($form);
         $form->addExtraClass('ajax-form');
-        $form->setLegend('Restore your password');
+        $form->setLegend('I\'ve lost my password');
+        $form->Actions()->first()->setTitle('Submit');
 
         if ($form->get_protector()) {
             $form->enableSpamProtection();
