@@ -29,8 +29,9 @@ class PlaceholderFormExtension extends Extension
         if (is_a($field, TextField::class) || is_a($field, TextareaField::class)) {
             if (!$field->getAttribute('placeholder')) {
                 $placeholder = $field->Title();
+                $cfg = Config::inst()->get(\get_class($this->owner));
 
-                if (!Config::inst()->get(\get_class($this->owner), 'no_placeholders')) {
+                if (!$cfg['no_placeholders']) {
                     $field->setAttribute(
                         'placeholder',
                         $placeholder
@@ -41,7 +42,7 @@ class PlaceholderFormExtension extends Extension
                  *  SilverStripe\UserForms\Form\UserForm:
                  *      show_labels: false
                  */
-                if (!Config::inst()->get(\get_class($this->owner), 'show_labels')) {
+                if (!$cfg['show_labels']) {
                     $field->setTitle('');
                 }
             }

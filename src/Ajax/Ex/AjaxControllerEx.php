@@ -4,6 +4,7 @@ namespace A2nt\CMSNiceties\Ajax\Ex;
 
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Director;
+use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\Form;
@@ -13,25 +14,52 @@ use SilverStripe\Security\Security;
 use SilverStripe\View\SSViewer;
 
 /**
- * Class \App\Service\Ex\ServiceAreaController
+ * Class \A2nt\CMSNiceties\Ajax\Ex\AjaxControllerEx
  *
- * @property \A2nt\CMSNiceties\Ajax\Ex\AjaxLoginFormControllerEx $owner
+ * @property \A2nt\CMSNiceties\Ajax\Ex\AjaxControllerEx $owner
  */
 class AjaxControllerEx extends Extension
 {
+    private static $no_placeholders = false;
+    private static $show_labels = false;
+
     private static $allowed_actions = [
         'LoginFormEx',
         'LostPasswordForm',
         'passwordsent',
     ];
 
-    private static function _makeAllFieldsRequired(Form $form)
+    private static function _processFields(Form $form)
     {
+        $cfg = Config::inst()->get(__CLASS__);
+
         $fields = $form->Fields();
-        foreach ($fields as $f) {
-            $f
+        foreach ($fields as $field) {
+            $name = $field->getName();
+            if ($name === 'Remember') {
+                continue;
+            }
+
+            $field
                 ->setAttribute('required', 'required')
                 ->addExtraClass('required');
+
+            /*
+             *  A2nt\CMSNiceties\Ajax\Ex\AjaxControllerEx:
+             *      show_labels: false
+             *      no_placeholders: false
+             */
+            if (!$cfg['no_placeholders']) {
+                $placeholder = $field->Title();
+                $field->setAttribute(
+                    'placeholder',
+                    $placeholder
+                );
+            }
+
+            if (!$cfg['show_labels']) {
+                $field->setTitle('');
+            }
         }
     }
 
@@ -41,10 +69,10 @@ class AjaxControllerEx extends Extension
 
         /* @var Form $form */
         $form = $ctrl->LoginForm();
-        self::_makeAllFieldsRequired($form);
+        self::_processFields($form);
 
         //$form->addExtraClass('ajax-form');
-        $form->setLegend('Sign in to your service account');
+        $form->setLegend('Log in to your service account');
 
         if ($form->get_protector()) {
             $form->enableSpamProtection();
@@ -64,7 +92,7 @@ class AjaxControllerEx extends Extension
             ->getLostPasswordHandler($ctrl->Link())
             ->lostPasswordForm();
 
-        self::_makeAllFieldsRequired($form);
+        self::_processFields($form);
         $form->addExtraClass('ajax-form');
         $form->setLegend('Restore your password');
 
