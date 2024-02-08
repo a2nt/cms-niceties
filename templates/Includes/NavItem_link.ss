@@ -5,13 +5,13 @@
         graphql-page
         $ExtraClass
         {$LinkClass}
-        <% if $RedirectionType = 'External' || $ExternalURL || $OpenInNewWindow %>
+        <% if $RedirectionType = 'External' || $ExternalURL || $OpenInNewWindow || $OpenInNewTab %>
             legacy
         <% end_if %>
         <% if $isCurrent || $isSection %>active<% end_if %>
         <% if $isSection %>section<% end_if %>
     "
-    <% if $OpenInNewWindow %>
+    <% if $OpenInNewWindow || $OpenInNewTab %>
         rel="noreferrer"
         target="_blank"
     <% end_if %>
