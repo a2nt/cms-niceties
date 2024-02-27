@@ -72,11 +72,18 @@ class AjaxControllerEx extends Extension
         self::_processFields($form);
 
         //$form->addExtraClass('ajax-form');
-        $form->setLegend('Log in to your service account');
 
         if ($form->get_protector()) {
             $form->enableSpamProtection();
         }
+
+
+        $form->setLegend(
+            _t(
+                'SilverStripe\\Security\\Security.LOGINFORMLEGEND',
+                'Log in'
+            )
+        );
 
         return $form;
     }
@@ -94,12 +101,23 @@ class AjaxControllerEx extends Extension
 
         self::_processFields($form);
         $form->addExtraClass('ajax-form');
-        $form->setLegend('I\'ve lost my password');
-        $form->Actions()->first()->setTitle('Submit');
+        $form->Actions()->first()->setTitle(
+            _t(
+                'SilverStripe\\Security\\Security.SUBMITTITLE',
+                'Submit'
+            )
+        );
 
         if ($form->get_protector()) {
             $form->enableSpamProtection();
         }
+
+        $form->setLegend(
+            _t(
+                'SilverStripe\\Security\\Security.LOSTPASSWORDFORMLEGEND',
+                'I\'ve lost my password'
+            )
+        );
 
         return $form;
     }
