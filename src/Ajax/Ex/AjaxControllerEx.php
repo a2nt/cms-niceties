@@ -4,11 +4,14 @@ namespace A2nt\CMSNiceties\Ajax\Ex;
 
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Director;
+use SilverStripe\Control\HTTPRequest;
+use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\Form;
 use SilverStripe\ORM\FieldType\DBHTMLText;
+use SilverStripe\ORM\ValidationResult;
 use SilverStripe\Security\MemberAuthenticator\MemberAuthenticator;
 use SilverStripe\Security\Security;
 use SilverStripe\View\SSViewer;
@@ -194,7 +197,7 @@ class AjaxControllerEx extends Extension
         return $json && $str != $json;
     }
 
-    public function prepareAjaxResponse($response)
+    public function prepareAjaxResponse(HTTPResponse $response)
     {
         $ctrl = $this->owner;
 
@@ -211,7 +214,44 @@ class AjaxControllerEx extends Extension
 
         $body = $response->getBody();
 
-        if (!self::isJson($body)) {
+        if (!$body && self::isFormRequest()) {
+            // form validation response
+
+            /* @var $req \SilverStripe\Control\HTTPRequest */
+            $req = $ctrl->getRequest();
+            $sess = $req->getSession();
+
+            $formName = $req->requestVar('formid');
+            $data = $sess->get('FormInfo');
+
+            if ($formName && $data) {
+                $sess->clear('FormInfo.'.$formName);
+
+                /* @var $valid \SilverStripe\ORM\ValidationResult */
+                $valid = unserialize($data[$formName]['result']);
+                $msgs = $valid->getMessages();
+
+                $body = json_encode([
+                    'status' => $valid->isValid()
+                        ? ValidationResult::TYPE_GOOD
+                        : ValidationResult::TYPE_ERROR,
+                    'msgs' => $msgs,
+                ]);
+
+                $response->removeHeader('Location');
+                $response->setStatusCode(200);
+            }
+        } elseif (!$body && $response->isRedirect()) {
+            // ajax redirect
+            $body = json_encode([
+                'location' => $response->getHeader('location'),
+                'ajax' => true,
+            ]);
+
+            $response->removeHeader('Location');
+            $response->setStatusCode(200);
+        } elseif (!self::isJson($body)) {
+            // render page
             $body = json_encode([
                 'ID' => $record->ID,
                 'Title' => $record->Title,
