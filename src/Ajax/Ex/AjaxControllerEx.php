@@ -68,7 +68,12 @@ class AjaxControllerEx extends Extension
         $ctrl = $this->owner;
 
         /* @var Form $form */
-        $form = $ctrl->LoginForm();
+        if (method_exists($ctrl, 'LoginForm')) {
+            $form = $ctrl->LoginForm();
+        } else {
+            $form = $ctrl->getLoginForms()['default'][0];
+        }
+
         self::_processFields($form);
 
         //$form->addExtraClass('ajax-form');

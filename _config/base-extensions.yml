@@ -17,6 +17,10 @@ PageController:
     - A2nt\CMSNiceties\Extensions\PageControllerEx
     - A2nt\CMSNiceties\Ajax\Ex\AjaxControllerEx
 
+SilverStripe\Security\Security:
+  extensions:
+    - A2nt\CMSNiceties\Ajax\Ex\AjaxControllerEx
+
 SilverStripe\CMS\Model\SiteTree:
   default_container_class: 'container'
   extensions:
