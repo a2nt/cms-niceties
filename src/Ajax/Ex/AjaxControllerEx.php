@@ -213,10 +213,7 @@ class AjaxControllerEx extends Extension
         );
 
         $body = $response->getBody();
-
-        if (!$body && self::isFormRequest()) {
-            // form validation response
-
+        if (self::isFormRequest()) {
             /* @var $req \SilverStripe\Control\HTTPRequest */
             $req = $ctrl->getRequest();
             $sess = $req->getSession();
@@ -224,7 +221,8 @@ class AjaxControllerEx extends Extension
             $formName = $req->requestVar('formid');
             $data = $sess->get('FormInfo');
 
-            if ($formName && $data) {
+            // form validation response
+            if ($formName && $data && isset($data[$formName]['result'])) {
                 $sess->clear('FormInfo.'.$formName);
 
                 /* @var $valid \SilverStripe\ORM\ValidationResult */
@@ -240,18 +238,28 @@ class AjaxControllerEx extends Extension
 
                 $response->removeHeader('Location');
                 $response->setStatusCode(200);
+                $response->setBody($body);
+
+                return $response;
             }
-        } elseif (!$body && $response->isRedirect()) {
-            // ajax redirect
+        }
+
+        // ajax redirect
+        if ($response->isRedirect()) {
             $body = json_encode([
                 'location' => $response->getHeader('location'),
-                'ajax' => true,
+                'loadAjax' => true,
             ]);
 
             $response->removeHeader('Location');
             $response->setStatusCode(200);
-        } elseif (!self::isJson($body)) {
-            // render page
+            $response->setBody($body);
+
+            return $response;
+        }
+
+        // render page
+        if (!self::isJson($body)) {
             $body = json_encode([
                 'ID' => $record->ID,
                 'Title' => $record->Title,
