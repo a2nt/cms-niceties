@@ -78,7 +78,7 @@ class AjaxControllerEx extends Extension
 
         //$form->addExtraClass('ajax-form');
 
-        if ($form->get_protector()) {
+        if (Director::isLive() && $form->get_protector()) {
             $form->enableSpamProtection();
         }
 
@@ -113,7 +113,7 @@ class AjaxControllerEx extends Extension
             )
         );
 
-        if ($form->get_protector()) {
+        if (Director::isLive() && $form->get_protector()) {
             $form->enableSpamProtection();
         }
 
@@ -186,6 +186,12 @@ class AjaxControllerEx extends Extension
         return SSViewer::create($tpl);
     }
 
+    private static function isJson($str)
+    {
+        $json = json_decode($str);
+        return $json && $str != $json;
+    }
+
     public function prepareAjaxResponse($response)
     {
         $ctrl = $this->owner;
@@ -201,16 +207,22 @@ class AjaxControllerEx extends Extension
             $ctrl->config()->get('ajax_resources')
         );
 
-        $response->setBody(json_encode([
-            'ID' => $record->ID,
-            'Title' => $record->Title,
-            'Link' => $ctrl->Link(),
-            'CSSClass' => $ctrl->CSSClass(),
-            'Resources' => $resources,
-            'RequestLink' => $url,
-            'MainContent' => $ctrl->customise([
-                'Layout' => DBHTMLText::create()->setValue($response->getBody()),
-            ])->renderWith('Includes/MainContent')->RAW(),
-        ]));
+        $body = $response->getBody();
+
+        if (!self::isJson($body)) {
+            $body = json_encode([
+                'ID' => $record->ID,
+                'Title' => $record->Title,
+                'Link' => $ctrl->Link(),
+                'CSSClass' => $ctrl->CSSClass(),
+                'Resources' => $resources,
+                'RequestLink' => $url,
+                'MainContent' => $ctrl->customise([
+                    'Layout' => DBHTMLText::create()->setValue($response->getBody()),
+                ])->renderWith('Includes/MainContent')->RAW(),
+            ]);
+        }
+
+        $response->setBody($body);
     }
 }
