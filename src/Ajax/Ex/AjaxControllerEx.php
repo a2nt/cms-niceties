@@ -22,6 +22,7 @@ class AjaxControllerEx extends Extension
 {
     private static $no_placeholders = false;
     private static $show_labels = false;
+    private static $add_asteriks = false;
 
     private static $allowed_actions = [
         'LoginFormEx',
@@ -48,12 +49,13 @@ class AjaxControllerEx extends Extension
              *  A2nt\CMSNiceties\Ajax\Ex\AjaxControllerEx:
              *      show_labels: false
              *      no_placeholders: false
+             *      add_asteriks: false
              */
             if (!$cfg['no_placeholders']) {
                 $placeholder = $field->Title();
                 $field->setAttribute(
                     'placeholder',
-                    $placeholder
+                    $placeholder.($cfg['add_asteriks'] ? ' *' : '')
                 );
             }
 
