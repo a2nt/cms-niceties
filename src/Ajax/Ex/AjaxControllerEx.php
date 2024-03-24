@@ -259,7 +259,7 @@ class AjaxControllerEx extends Extension
         }
 
         // render page
-        if (!self::isJson($body)) {
+        if ($body && !self::isJson($body)) {
             $body = json_encode([
                 'ID' => $record->ID,
                 'Title' => $record->Title,
