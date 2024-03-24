@@ -207,9 +207,11 @@ class AjaxControllerEx extends Extension
         $url = $req->getURL();
         $url = $url === 'home' ? '/' : $url;
 
+        $ajax_res = $ctrl->config()->get('ajax_resources');
+        $graphql_res = $ctrl->config()->get('graphql_resources');
         $resources = array_merge(
-            $ctrl->config()->get('graphql_resources'),
-            $ctrl->config()->get('ajax_resources')
+            $ajax_res ? $ajax_res : [],
+            $graphql_res ? $graphql_res : []
         );
 
         $body = $response->getBody();
