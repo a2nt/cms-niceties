@@ -1,5 +1,8 @@
 ---
 Name: a2nt-cms-niceties-base-extensions
+After:
+  - login-forms
+  - '#coresecurity'
 ---
 # Basic extensions
 SilverStripe\Admin\LeftAndMain:
@@ -51,6 +54,10 @@ SilverStripe\Core\Injector\Injector:
     class: A2nt\CMSNiceties\Forms\GridField\GridFieldConfig_RelationEditor
   SilverStripe\Forms\FormRequestHandler:
     class: A2nt\CMSNiceties\Ajax\AjaxFormRequestHandler
+  SilverStripe\Security\Security:
+    properties:
+      Authenticators:
+        default: '%$A2nt\CMSNiceties\Forms\Authenticator'
 
 SilverStripe\UserForms\Form\UserForm:
   extensions:
