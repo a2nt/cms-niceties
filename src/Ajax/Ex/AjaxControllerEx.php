@@ -10,6 +10,7 @@ use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
 use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Forms\Form;
+use SilverStripe\Forms\HiddenField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\Security\MemberAuthenticator\MemberAuthenticator;
@@ -70,23 +71,17 @@ class AjaxControllerEx extends Extension
 
     public function LoginFormEx()
     {
-        $ctrl = $this->owner;
+        $ctrl = Security::singleton();
 
         /* @var Form $form */
-        if (method_exists($ctrl, 'LoginForm')) {
-            $form = $ctrl->LoginForm();
-        } else {
-            $form = $ctrl->getLoginForms()['default'][0];
-        }
-
+        $form = $ctrl->getLoginForms()['default'][0];
         self::_processFields($form);
 
         //$form->addExtraClass('ajax-form');
-
-        if (Director::isLive() && $form->get_protector()) {
-            $form->enableSpamProtection();
-        }
-
+        $back = $this->owner->Link();
+        $form->setFormAction('/Security/login/default/LoginForm/?BackURL='.$back);
+        $form->Fields()
+            ->push(HiddenField::create('BackURL')->setValue($back));
 
         $form->setLegend(
             _t(
@@ -207,11 +202,9 @@ class AjaxControllerEx extends Extension
         $url = $req->getURL();
         $url = $url === 'home' ? '/' : $url;
 
-        $ajax_res = $ctrl->config()->get('ajax_resources');
-        $graphql_res = $ctrl->config()->get('graphql_resources');
         $resources = array_merge(
-            $ajax_res ? $ajax_res : [],
-            $graphql_res ? $graphql_res : []
+            $ctrl->config()->get('graphql_resources'),
+            $ctrl->config()->get('ajax_resources')
         );
 
         $body = $response->getBody();
