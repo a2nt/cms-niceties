@@ -22,7 +22,7 @@ class LoginHandler extends MemberAuthenticatorLoginHandler
     {
         $form = parent::loginForm();
 
-        if (Director::isLive() && $form->get_protector()) {
+        if (self::config()->get('enable_captcha') && Director::isLive() && $form->get_protector()) {
             $form->enableSpamProtection();
         }
         $form->addExtraClass('legacy');
