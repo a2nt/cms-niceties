@@ -28,7 +28,7 @@ class MailerFix extends Email
 
     private static function convertVars($mails)
     {
-        return is_array($mails) ? implode(' ', $mails) : $mails;
+        return is_array($mails) ? implode(',', $mails) : $mails;
     }
 
     private function loadDetails()
@@ -50,7 +50,7 @@ class MailerFix extends Email
             $v = $this->$func();
 
             if ($v) {
-                $this->args[$i] = $v;
+                $this->args[$i] = is_array($v) ? array_keys($v) : $v;
             }
 
             $i++;
@@ -64,6 +64,7 @@ class MailerFix extends Email
 
         $this->loadDetails();
         $body = $this->getBody();
+
         $to = self::convertVars($this->args[1]);
 
         $email = (new MimeEmail())
@@ -94,8 +95,7 @@ class MailerFix extends Email
             $email->replyTo($reply);
         }
 
-
-        $mailer->send($email);
+        return $mailer->send($email);
         //parent::send();
     }
 
