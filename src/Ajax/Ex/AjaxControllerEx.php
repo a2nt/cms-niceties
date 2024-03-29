@@ -2,19 +2,21 @@
 
 namespace A2nt\CMSNiceties\Ajax\Ex;
 
+use SilverStripe\CMS\Model\RedirectorPage;
 use SilverStripe\Control\Controller;
 use SilverStripe\Control\Director;
-use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Control\HTTPResponse;
 use SilverStripe\Core\Config\Config;
 use SilverStripe\Core\Extension;
 use SilverStripe\Core\Injector\Injector;
+use SilverStripe\ErrorPage\ErrorPage;
 use SilverStripe\Forms\Form;
 use SilverStripe\Forms\HiddenField;
 use SilverStripe\ORM\FieldType\DBHTMLText;
 use SilverStripe\ORM\ValidationResult;
 use SilverStripe\Security\MemberAuthenticator\MemberAuthenticator;
 use SilverStripe\Security\Security;
+use SilverStripe\UserForms\Control\UserDefinedFormController;
 use SilverStripe\View\SSViewer;
 
 /**
@@ -269,5 +271,26 @@ class AjaxControllerEx extends Extension
         }
 
         $response->setBody($body);
+    }
+
+
+    public function isLegacy()
+    {
+        $object = $this->owner;
+
+        if (
+            is_a($object, UserDefinedFormController::class)
+            && $object->getAction() === 'finished'
+        ) {
+            return true;
+        }
+
+        return $object->config()->get('legacy') || in_array(
+            $object->ClassName,
+            [
+                RedirectorPage::class,
+                ErrorPage::class,
+            ]
+        );
     }
 }
