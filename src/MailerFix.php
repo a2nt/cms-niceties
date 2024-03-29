@@ -26,10 +26,35 @@ class MailerFix extends Email
         parent::__construct($from, $to, $subject, $body, $cc, $bcc, $returnPath);
     }
 
-
     private static function convertVars($mails)
     {
         return is_array($mails) ? implode(' ', $mails) : $mails;
+    }
+
+    private function loadDetails()
+    {
+        $fields = [
+            'From',
+            'To',
+            'Subject',
+            'Body',
+            'CC',
+            'BCC',
+            'ReturnPath',
+        ];
+
+        $i = 0;
+        foreach ($fields as $f) {
+            $func = 'get'.$f;
+
+            $v = $this->$func();
+
+            if ($v) {
+                $this->args[$i] = $v;
+            }
+
+            $i++;
+        }
     }
 
     public function send()
@@ -37,6 +62,7 @@ class MailerFix extends Email
         $transport = Transport::fromDsn('native://default');//smtp://localhost
         $mailer = new Mailer($transport);
 
+        $this->loadDetails();
         $body = $this->getBody();
         $to = self::convertVars($this->args[1]);
 
@@ -77,7 +103,7 @@ class MailerFix extends Email
     {
         // admin_email can have a string or an array config
         // https://docs.silverstripe.org/en/4/developer_guides/email/#administrator-emails
-        $adminEmail =Email::config()->get('admin_email');
+        $adminEmail = Email::config()->get('admin_email');
         if (is_array($adminEmail) && count($adminEmail ?? []) > 0) {
             $defaultFrom = array_keys($adminEmail)[0];
         } else {
