@@ -63,8 +63,9 @@ class MailerFix extends Email
         $mailer = new Mailer($transport);
 
         $this->loadDetails();
-        $body = $this->getBody();
+        $this->render();
 
+        $body = $this->getBody();
         $to = self::convertVars($this->args[1]);
 
         $email = (new MimeEmail())
