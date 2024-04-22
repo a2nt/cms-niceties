@@ -13,7 +13,7 @@
     }],
     "minimum-stability": "dev",
     "require": {
-        "silverstripe/cms": "*",
+        "silverstripe/cms": "^4",
         "a2nt/silverstripe-elemental-basics": "*",
         "silverstripe/widgets": "*",
         "gorriecoe/silverstripe-linkfield": "*",
