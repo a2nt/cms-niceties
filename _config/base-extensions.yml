@@ -58,8 +58,6 @@ SilverStripe\Core\Injector\Injector:
     properties:
       Authenticators:
         default: '%$A2nt\CMSNiceties\Forms\Authenticator'
-  SilverStripe\Control\Email\Email:
-    class: A2nt\CMSNiceties\MailerFix
 
 SilverStripe\UserForms\Form\UserForm:
   extensions:
