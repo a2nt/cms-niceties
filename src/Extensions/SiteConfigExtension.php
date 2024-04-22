@@ -142,16 +142,18 @@ class SiteConfigExtension extends DataExtension
 
         $fields->addFieldsToTab('Root.Maps', $addrFields);
 
-        if (MapboxField::getAccessToken()) {
-            $fields->addFieldsToTab('Root.Maps', [
-                //TextField::create('MapAPIKey'),
-                TextField::create('MapZoom'),
-                MapboxField::create('Map', 'Choose a location', 'Latitude', 'Longitude'),
-            ]);
-        } else {
-            $fields->addFieldsToTab('Root.Maps', [
-                LiteralField::create('MapNotice', '<p class="alert alert-info">No Map API keys specified.</p>')
-            ]);
+        if (\class_exists(MapboxField::class)) {
+            if (MapboxField::getAccessToken()) {
+                $fields->addFieldsToTab('Root.Maps', [
+                    //TextField::create('MapAPIKey'),
+                    TextField::create('MapZoom'),
+                    MapboxField::create('Map', 'Choose a location', 'Latitude', 'Longitude'),
+                ]);
+            } else {
+                $fields->addFieldsToTab('Root.Maps', [
+                    LiteralField::create('MapNotice', '<p class="alert alert-info">No Map API keys specified.</p>')
+                ]);
+            }
         }
 
         /*GoogleMapField::create(
