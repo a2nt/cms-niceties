@@ -5,11 +5,11 @@ namespace A2nt\CMSNiceties\Tasks;
 use SilverStripe\Assets\File;
 use SilverStripe\Dev\BuildTask;
 
-class PublishAllFiles extends BuildTask
+class BrokenFilesTask extends BuildTask
 {
-    protected $title = 'Publish All Files Task';
+    protected $title = 'Broken Files Task';
 
-    protected $description = 'Publish All Files';
+    protected $description = 'Broken files report';
 
     protected $enabled = true;
 
@@ -19,8 +19,10 @@ class PublishAllFiles extends BuildTask
         $i = 0;
         foreach ($files as $file) {
             if ($file->exists()) {
-                $file->publishFile();
+                echo '<b>'.$file->getField('Name').'</b><br/>';
+                $file->publishRecursive();
             }
+
             $i++;
         }
 
