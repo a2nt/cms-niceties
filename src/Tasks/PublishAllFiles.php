@@ -5,11 +5,11 @@ namespace A2nt\CMSNiceties\Tasks;
 use SilverStripe\Assets\File;
 use SilverStripe\Dev\BuildTask;
 
-class BrokenFilesTask extends BuildTask
+class PublishAllFiles extends BuildTask
 {
-    protected $title = 'Broken Files Task';
+    protected $title = 'Publish All Files';
 
-    protected $description = 'Broken files report';
+    protected $description = 'Publish All Files';
 
     protected $enabled = true;
 
