@@ -22,7 +22,7 @@ class DeferredRequirements implements TemplateGlobalProvider
     private static $nojquery = false;
     private static $jquery_version = '3.4.1';
     private static $nofontawesome = false;
-    private static $fontawesome_svg = true;
+    private static $fontawesome_svg = false;
     private static $custom_requirements = [];
 
     /**

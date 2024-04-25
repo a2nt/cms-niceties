@@ -13,11 +13,10 @@
     }],
     "minimum-stability": "dev",
     "require": {
-        "silverstripe/cms": "^4",
+        "silverstripe/cms": "^5",
         "a2nt/silverstripe-elemental-basics": "*",
         "silverstripe/widgets": "*",
-        "gorriecoe/silverstripe-linkfield": "*",
-        "symfony/mailer": "^6"
+        "gorriecoe/silverstripe-linkfield": "*"
     },
     "autoload": {
         "psr-4": {

@@ -75,8 +75,11 @@ class AjaxControllerEx extends Extension
     {
         $ctrl = Security::singleton();
 
+        $auth = $ctrl->getApplicableAuthenticators()['default'];
+        $loginHandler = $auth->getLoginHandler('login');
+
         /* @var Form $form */
-        $form = $ctrl->getLoginForms()['default'][0];
+        $form = $loginHandler->LoginForm();
         self::_processFields($form);
 
         //$form->addExtraClass('ajax-form');

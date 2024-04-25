@@ -1,19 +1,6 @@
 ---
 Name: a2nt-cms-niceties-templates-requirements
 ---
-A2nt\CMSNiceties\Templates\DeferredRequirements:
-  nofontawesome: false
-  version: false
-  static_domain: false
-  deferred: true
-  noreact: false
-  nojquery: true
-  jquery_version: '3.4.1'
-  fontawesome_svg: true
-
-SilverStripe\FontAwesome\FontAwesomeField:
-  version: '5.12.0'
-
 SilverStripe\View\Requirements:
   disable_flush_combined: true
 SilverStripe\View\Requirements_Backend:

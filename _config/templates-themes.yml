@@ -3,6 +3,20 @@ Name: a2nt-cms-niceties-templates-themes
 After:
   - a2nt-cms-niceties-options-elements
 ---
+
+A2nt\CMSNiceties\Templates\DeferredRequirements:
+  nofontawesome: false
+  version: false
+  static_domain: false
+  deferred: true
+  noreact: false
+  nojquery: true
+  jquery_version: '3.4.1'
+  fontawesome_svg: false
+
+SilverStripe\FontAwesome\FontAwesomeField:
+  version: '6.5.1'
+
 SilverStripe\View\SSViewer:
   source_file_comments: false
   themes:
