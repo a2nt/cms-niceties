@@ -2,7 +2,7 @@
     <% if $HeroImageRecursive %>
         <div class="element element__hero-image">
             <div class="element-container">
-                <% include SlideItem Image=$HeroImageRecursive, SlideWidth='2140', SlideHeight='450' %>
+                $HeroImageRecursive.Fill(2140,450)
             </div>
         </div>
     <% end_if %>

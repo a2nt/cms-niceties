@@ -41,7 +41,7 @@
     <div class="element">
         <div class="element_container">
             <div class="$DefaultContainer">
-                $ExtraCode
+                $ExtraCode.RAW
             </div>
         </div>
     </div>
