@@ -5,7 +5,7 @@
         graphql-page
         $ExtraClass
         {$LinkClass}
-        <% if $RedirectionType = 'External' || $ExternalURL || $OpenInNewWindow || $OpenInNewTab %>
+        <% if $ClassName = 'SilverStripe\CMS\Model\RedirectorPage' || $RedirectionType = 'External' || $ExternalURL || $OpenInNewWindow || $OpenInNewTab %>
             legacy
         <% end_if %>
         <% if $isCurrent || $isSection %>active<% end_if %>
