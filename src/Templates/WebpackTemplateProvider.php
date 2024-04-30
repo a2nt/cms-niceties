@@ -79,7 +79,19 @@ class WebpackTemplateProvider implements TemplateGlobalProvider
     public static function mainTheme()
     {
         $themes = Config::inst()->get(SSViewer::class, 'themes');
-        return is_array($themes) && $themes[0] !== '$public' && $themes[0] !== '$default' ? $themes[0] : false;
+        if (!is_array($themes)) {
+            return;
+        }
+
+        $theme = null;
+        foreach ($themes as $t) {
+            if ($t  !== '$public' && $t !== '$default') {
+                $theme = $t;
+                break;
+            }
+        }
+
+        return $theme;
     }
 
     public static function resourcesURL($link = null): string
