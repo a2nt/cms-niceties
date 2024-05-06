@@ -1,6 +1,5 @@
 <?php
 
-
 namespace A2nt\CMSNiceties\Widgets;
 
 use gorriecoe\Link\Models\Link;
@@ -33,12 +32,19 @@ class LinksWidget extends Widget
         'Links' => Link::class,
     ];
 
+    private static $many_many_extraFields = [
+        'Links' => [
+            'Sort' => 'Int',
+        ],
+    ];
+
     private static $owns = [
         'Links',
     ];
 
     public function getCMSFields()
     {
+        //die('aaa');
         $fields = parent::getCMSFields();
 
         if($this->ID) {
@@ -47,11 +53,13 @@ class LinksWidget extends Widget
                 'Links',
                 $this
             ));
-        }else{
-            $fields->push(LiteralField::create(
-                'Note',
-                '<p class="alert alert-warning"><b>Note:</b> The widget needs to be saved before adding a link.'
-                .' Enter the Title and click "+ Create" button at the bottom left corner of the screen</p>')
+        } else {
+            $fields->push(
+                LiteralField::create(
+                    'Note',
+                    '<p class="alert alert-warning"><b>Note:</b> The widget needs to be saved before adding a link.'
+                    .' Enter the Title and click "+ Create" button at the bottom left corner of the screen</p>'
+                )
             );
         }
 
