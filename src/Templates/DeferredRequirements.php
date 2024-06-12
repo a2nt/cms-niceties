@@ -249,7 +249,7 @@ class DeferredRequirements implements TemplateGlobalProvider
         );
 
         $absolutePath = Director::getAbsFile($path);
-        $hash = sha1_file($absolutePath);
+        $hash = filemtime($absolutePath);
 
         $version = $config['version'] ? '&v='.$config['version'] : '';
         //$static_domain = $config['static_domain'];
