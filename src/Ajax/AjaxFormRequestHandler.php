@@ -2,6 +2,7 @@
 
 namespace A2nt\CMSNiceties\Ajax;
 
+use SilverStripe\Control\Middleware\HTTPCacheControlMiddleware;
 use A2nt\CMSNiceties\Ajax\Ex\AjaxControllerEx;
 use SilverStripe\Forms\FormRequestHandler;
 use SilverStripe\ORM\ValidationResult;
@@ -25,6 +26,9 @@ class AjaxFormRequestHandler extends FormRequestHandler
     public function httpSubmission($request)
     {
         $resp = parent::httpSubmission($request);
+
+        HTTPCacheControlMiddleware::singleton()
+            ->disableCache();
 
         if (!AjaxControllerEx::isFormRequest()) {
             return $resp;
