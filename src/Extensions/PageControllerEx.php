@@ -154,6 +154,7 @@ class PageControllerEx extends Extension
         )->setFormMethod('GET');
 
         $form->setLegend('Search ' . $config->getField('Title') . ' Website');
+        $form->disableSecurityToken();
 
         return $form;
     }
