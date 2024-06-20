@@ -14,6 +14,7 @@ use SilverStripe\FontAwesome\FontAwesomeField;
 
 class DeferredRequirements implements TemplateGlobalProvider
 {
+    private static $blocked = [];
     private static $css = [];
     private static $js = [];
     private static $deferred = false;
@@ -161,8 +162,18 @@ class DeferredRequirements implements TemplateGlobalProvider
         return self::forTemplate();
     }
 
+    public static function block($path): void
+    {
+        self::$blocked[] = $path;
+    }
+
+
     public static function loadCSS($css): void
     {
+        if (in_array($css, self::$blocked)) {
+            return;
+        }
+
         $external = (mb_strpos($css, '//') === 0 || mb_strpos($css, 'http') === 0);
         //if (self::getDeferred() && !self::webpackActive()) {
         if ((self::getDeferred() && !self::webpackActive()) || $external) {
@@ -174,6 +185,10 @@ class DeferredRequirements implements TemplateGlobalProvider
 
     public static function loadJS($js): void
     {
+        if (in_array($js, self::$blocked)) {
+            return;
+        }
+
         /*$external = (mb_substr($js, 0, 2) === '//' || mb_substr($js, 0, 4) === 'http');
         if ($external || (self::getDeferred() && !self::_webpackActive())) {*/
         // webpack supposed to load external JS
