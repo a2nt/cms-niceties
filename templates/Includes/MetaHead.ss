@@ -27,8 +27,8 @@ $MetaTags
     <meta property="og:description" content="{$MetaDescription}" />
     <meta property="description" content="{$MetaDescription}" />
 <% else %>
-    <meta property="og:description" content="{$Summary}" />
-    <meta property="description" content="{$Summary}" />
+    <meta property="og:description" content="{$SiteConfig.Title} {$Summary}" />
+    <meta property="description" content="{$SiteConfig.Title} {$Summary}" />
 <% end_if %>
 
 <% if $FeaturedImage %>
