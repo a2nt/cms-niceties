@@ -25,6 +25,10 @@ $MetaTags
 
 <% if $MetaDescription %>
     <meta property="og:description" content="{$MetaDescription}" />
+    <meta property="description" content="{$MetaDescription}" />
+<% else %>
+    <meta property="og:description" content="{$Summary}" />
+    <meta property="description" content="{$Summary}" />
 <% end_if %>
 
 <% if $FeaturedImage %>
