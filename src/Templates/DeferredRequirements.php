@@ -14,6 +14,9 @@ use SilverStripe\FontAwesome\FontAwesomeField;
 
 class DeferredRequirements implements TemplateGlobalProvider
 {
+    private static $preloadFont = [];
+    private static $preloadJS = [];
+    private static $preloadCSS = [];
     private static $blocked = [];
     private static $css = [];
     private static $js = [];
@@ -38,6 +41,7 @@ class DeferredRequirements implements TemplateGlobalProvider
             'WebpackActive' => 'webpackActive',
             'EmptyImgSrc' => 'emptyImageSrc',
             'HttpMethod' => 'httpMethod',
+            'Preloads' => 'Preloads',
         ];
     }
 
@@ -52,7 +56,7 @@ class DeferredRequirements implements TemplateGlobalProvider
         return ($req) ? $req->httpMethod() : null;
     }
 
-    public static function Auto($class = false): string
+    public static function setupAuto($class = false): void
     {
         $config = Config::inst()->get(self::class);
         $projectName = WebpackTemplateProvider::projectName();
@@ -158,22 +162,90 @@ class DeferredRequirements implements TemplateGlobalProvider
                 self::loadCSS('https://use.fontawesome.com/releases/v'.$v.'/css/all.css');
             }
         }
+    }
 
+    public static function Auto(string | bool $class = false): string
+    {
+        self::setupAuto($class);
         return self::forTemplate();
     }
 
-    public static function block($path): void
+    public static function block(array | string $path): void
     {
-        self::$blocked[] = $path;
+        if (!is_array($path)) {
+            $path = [$path];
+        }
+        self::$blocked = array_merge(self::$blocked, $path);
     }
 
+    public static function addPreloadCSS(array | string $path): void
+    {
+        if (!is_array($path)) {
+            $path = [$path];
+        }
+        self::$preloadCSS = array_merge(self::$preloadCSS, $path);
+    }
+
+    public static function addPreloadJS(array | string $path): void
+    {
+        if (!is_array($path)) {
+            $path = [$path];
+        }
+        self::$preloadJS = array_merge(self::$preloadJS, $path);
+    }
+
+    public static function addPreloadFont(array | string $path): void
+    {
+        self::$preloadFont = array_merge(self::$preloadFont, $path);
+    }
+
+    private static function getPreloadLine(string $url, string | null $as = null, string | null $type = null)
+    {
+        $crossorigin = strpos('//', $url) ? ' crossorigin ' : '';
+        $type = $type ?: ' type="'.$type.'" ';
+
+        return '<link rel="preload" href="'.$url.'" as="'.$as.'"'.$type.$crossorigin.'/>';
+    }
+
+    public static function Preloads(): string
+    {
+        self::setupAuto();
+
+        self::$css = array_unique(self::$css);
+        $html = '';
+
+        $csses = array_merge(self::$css, self::$preloadCSS);
+        foreach ($csses as $css) {
+            $url = self::get_url($css);
+            $html .= self::getPreloadLine($url, 'style');
+        }
+        unset($csses, $css);
+
+        $jss = array_merge(self::$js, self::$preloadJS);
+        foreach ($jss as $js) {
+            $url = self::get_url($js);
+            $html .= self::getPreloadLine($url, 'script');
+        }
+        unset($jss, $js);
+
+        $fonts = self::$preloadFont;
+        foreach ($fonts as $font) {
+            $type = 'font/woff2';
+
+            if (str_contains($font, 'ttf')) {
+                $type = 'font/ttf';
+            }
+
+            $url = self::get_url($font);
+            $html .= self::getPreloadLine($url, 'font', $type);
+        }
+        unset($fonts, $font);
+
+        return $html;
+    }
 
     public static function loadCSS($css): void
     {
-        if (in_array($css, self::$blocked)) {
-            return;
-        }
-
         $external = (mb_strpos($css, '//') === 0 || mb_strpos($css, 'http') === 0);
         //if (self::getDeferred() && !self::webpackActive()) {
         if ((self::getDeferred() && !self::webpackActive()) || $external) {
@@ -185,10 +257,6 @@ class DeferredRequirements implements TemplateGlobalProvider
 
     public static function loadJS($js): void
     {
-        if (in_array($js, self::$blocked)) {
-            return;
-        }
-
         /*$external = (mb_substr($js, 0, 2) === '//' || mb_substr($js, 0, 4) === 'http');
         if ($external || (self::getDeferred() && !self::_webpackActive())) {*/
         // webpack supposed to load external JS
