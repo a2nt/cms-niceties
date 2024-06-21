@@ -201,10 +201,10 @@ class DeferredRequirements implements TemplateGlobalProvider
 
     private static function getPreloadLine(string $url, string | null $as = null, string | null $type = null)
     {
-        $crossorigin = strpos('//', $url) ? ' crossorigin ' : '';
-        $type = $type ?: ' type="'.$type.'" ';
+        $crossorigin = '';// strpos('//', $url) ? ' crossorigin="anonymous" ' : '';
+        $type = $type ? ' type="'.$type.'" ' : '';
 
-        return '<link rel="preload" href="'.$url.'" as="'.$as.'"'.$type.$crossorigin.'/>';
+        return '<link rel="preload" href="'.$url.'" as="'.$as.'" '.$type.$crossorigin.'/>';
     }
 
     public static function Preloads(): string
@@ -240,6 +240,9 @@ class DeferredRequirements implements TemplateGlobalProvider
             $html .= self::getPreloadLine($url, 'font', $type);
         }
         unset($fonts, $font);
+
+        $preloadPath = Controller::curr()->Link().'?ajax=1';
+        $html .= '<link rel="preload" as="fetch" href="'.$preloadPath.'" />'."<script>fetch('".$preloadPath."', {method:'GET',credentials:'include',mode:'cors'}).then((r)=>{return r.json()}).then((d)=>{window.preloadedData = d})</script>";
 
         return $html;
     }
