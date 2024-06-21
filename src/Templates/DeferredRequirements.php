@@ -241,6 +241,10 @@ class DeferredRequirements implements TemplateGlobalProvider
         }
         unset($fonts, $font);
 
+        $html .= '<link rel="preload" as="image" href="'
+            .WebpackTemplateProvider::resourcesURL('logo.png')
+        .'" />';
+
         /*$preloadPath = Controller::curr()->Link().'?ajax=1';
         $html .= '<link rel="preload" as="fetch" href="'.$preloadPath.'" />'."<script>fetch('".$preloadPath."', {method:'GET',credentials:'include',mode:'no-cors'}).then((r)=>{return r.json()}).then((d)=>{window.preloadedData = d})</script>";*/
 
