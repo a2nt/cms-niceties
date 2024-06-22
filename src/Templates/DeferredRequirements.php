@@ -252,7 +252,11 @@ class DeferredRequirements implements TemplateGlobalProvider
             $preloadPath = $preloadPath.'?ajax=1&m='.time();
 
             $html .= '<link rel="preload" as="fetch" href="'.$preloadPath.'" />'
-                .'<script>try{'
+                .'<script>'
+                .'window.addEventListener("load-ready",() =>{'
+                    .'window.dispatchEvent(new Event("prefetch-loaded"));console.log("Prefetched before js ready")'
+                .'});'
+                .'try{'
                 ."fetch('".$preloadPath."', {method:'GET',credentials:'include',mode:'no-cors'})"
                 .'.then((r)=>{return r.json()})'
                 .'.then((d)=>{'
@@ -264,7 +268,8 @@ class DeferredRequirements implements TemplateGlobalProvider
                     .'window.dispatchEvent(new Event("prefetch-loaded"));'
                     .'console.warn("Prefetch Error", e)'
                 .'})'
-                .'}catch(e){window.dispatchEvent(new Event("prefetch-loaded"));console.warn("Prefetch Error", e)}</script>';
+                .'}catch(e){window.dispatchEvent(new Event("prefetch-loaded"));console.warn("Prefetch Error", e)};'
+                .'</script>';
         }
 
         return $html;
