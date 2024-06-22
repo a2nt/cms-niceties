@@ -245,8 +245,27 @@ class DeferredRequirements implements TemplateGlobalProvider
             .WebpackTemplateProvider::resourcesURL('logo.png')
         .'" />';
 
-        /*$preloadPath = Controller::curr()->Link().'?ajax=1';
-        $html .= '<link rel="preload" as="fetch" href="'.$preloadPath.'" />'."<script>fetch('".$preloadPath."', {method:'GET',credentials:'include',mode:'no-cors'}).then((r)=>{return r.json()}).then((d)=>{window.preloadedData = d})</script>";*/
+        $ctrl = Controller::curr();
+        if ($ctrl) {
+            $preloadPath = $ctrl->Link();
+            $preloadPath = ($preloadPath === '/home/') ? '/' : $preloadPath;
+            $preloadPath = $preloadPath.'?ajax=1&m='.time();
+
+            $html .= '<link rel="preload" as="fetch" href="'.$preloadPath.'" />'
+                .'<script>try{'
+                ."fetch('".$preloadPath."', {method:'GET',credentials:'include',mode:'no-cors'})"
+                .'.then((r)=>{return r.json()})'
+                .'.then((d)=>{'
+                    .'window.preloadedData = d;'
+                    .'window.dispatchEvent(new Event("prefetch-loaded"));'
+                    .'console.log("Prefetch is loaded")'
+                .'})'
+                .'.catch((e) => {'
+                    .'window.dispatchEvent(new Event("prefetch-loaded"));'
+                    .'console.warn("Prefetch Error", e)'
+                .'})'
+                .'}catch(e){window.dispatchEvent(new Event("prefetch-loaded"));console.warn("Prefetch Error", e)}</script>';
+        }
 
         return $html;
     }
