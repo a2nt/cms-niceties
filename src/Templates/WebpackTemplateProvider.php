@@ -104,7 +104,7 @@ class WebpackTemplateProvider implements TemplateGlobalProvider
 
         return Controller::join_links(
             Director::baseURL(),
-            '/resources/',
+            RESOURCES_DIR,
             self::projectName(),
             $cfg['dist'],
             'img',
