@@ -8,6 +8,7 @@ use SilverStripe\Forms\LiteralField;
 use SilverStripe\Widgets\Forms\WidgetAreaEditor;
 use SilverStripe\Widgets\Model\Widget;
 use SilverStripe\Widgets\Model\WidgetArea;
+use SilverStripe\Forms\CheckboxField;
 
 /**
  * Class \A2nt\CMSNiceties\Widgets\WidgetPageExtension
@@ -16,6 +17,10 @@ use SilverStripe\Widgets\Model\WidgetArea;
  */
 class WidgetPageExtension extends \SilverStripe\Widgets\Extensions\WidgetPageExtension
 {
+    private static $db = [
+        'DisableSidebar' => 'Boolean(0)',
+    ];
+
     public function updateCMSFields(FieldList $fields)
     {
         parent::updateCMSFields($fields);
@@ -23,8 +28,8 @@ class WidgetPageExtension extends \SilverStripe\Widgets\Extensions\WidgetPageExt
         $tab = $fields->findOrMakeTab('Root.Widgets');
 
         $tab->setTitle('Sidebar');
-
         $tab->removeByName('SideBar');
+        $tab->push(CheckboxField::create('DisableSidebar'));
 
         $widgetTypes =  WidgetAreaEditor::create('Sidebar')->AvailableWidgets();
         $available = [];
