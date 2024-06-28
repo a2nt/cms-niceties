@@ -49,6 +49,11 @@ class SiteTreeExtension extends DataExtension
     public function ShowSidebar()
     {
         $obj = $this->owner;
+
+        if($obj->DisableSidebar) {
+            return false;
+        }
+
         $area = $obj->ElementalArea();
         if (!$area) {
             return true;

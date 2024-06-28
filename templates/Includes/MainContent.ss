@@ -7,7 +7,7 @@
         </div>
     <% end_if %>
 
-    <% if not $DisableSidebar && $SideBarContent || $SideBarView && $SideBarView.Widgets.Count %>
+    <% if $ShowSidebar %>
         <div class="content-holder content-holder__sidebar">
             <div class="{$DefaultContainer}">
                 <div class="row">
