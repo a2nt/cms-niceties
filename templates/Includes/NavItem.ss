@@ -1,11 +1,10 @@
 <% if $Children %>
     <div
         class="
-            nav-item dropdown dropdown-hover
+            nav-item dropdown
             <% if $SubmenuColumns %>submenu-cols-dropdown<% end_if %>
             {$CSSClass} {$ExtraClass}
         "
-        <% if $Children %>data-bs-toggle="hover"<% end_if %>
     >
         <% include NavItem_link ExtraClass="dropdown-toggle dropdown-toggle-fl dropdown-toggle-notouch" %>
 
@@ -13,7 +12,7 @@
             id="NavItemButton{$ID}"
             class="nav-link dropdown-toggle dropdown-toggle-sm dropdown-toggle-touch<% if $RedirectionType = 'External' || $ExternalURL || $OpenInNewWindow %> external<% end_if %><% if $DropdownNoLink %> d-block<% end_if %>"
             role="button"
-            data-bs-toggle="dropdown"
+            data-bs-toggle="hover"
             aria-expanded="false"
             type="button"
         >
