@@ -1,6 +1,6 @@
-<div id="SiteWideAlerts" class="offline-message">
+<div id="SiteWideAlerts">
 	<div
-		class="alert alert-danger alert-offline alert-dismissible fade show"
+		class="offline-message alert alert-danger alert-offline alert-dismissible fade show"
 		role="alert"
 	>
 		<div class="typography">
