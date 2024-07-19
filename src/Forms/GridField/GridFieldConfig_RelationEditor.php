@@ -10,7 +10,7 @@ class GridFieldConfig_RelationEditor extends GridFieldGridFieldConfig_RelationEd
 {
     public function __construct($itemsPerPage = null, $showPagination = null, $showAdd = null)
     {
-        parent::__construct();
+        parent::__construct($itemsPerPage, $showPagination, $showAdd);
 
         $this->removeComponentsByType([
             GridField_ActionMenu::class,

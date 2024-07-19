@@ -10,7 +10,7 @@ class GridFieldConfig_RecordEditor extends GridFieldGridFieldConfig_RecordEditor
 {
     public function __construct($itemsPerPage = null)
     {
-        parent::__construct();
+        parent::__construct($itemsPerPage);
 
         $this->removeComponentsByType([
             GridField_ActionMenu::class,
