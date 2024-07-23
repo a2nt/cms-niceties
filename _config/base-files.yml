@@ -10,6 +10,7 @@ SilverStripe\Assets\Upload_Validator:
 
 SilverStripe\Assets\File:
     allowed_extensions:
+        - 'svg'
         - 'ace'
         - 'arc'
         - 'arj'
