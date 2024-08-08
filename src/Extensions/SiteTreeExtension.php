@@ -50,7 +50,7 @@ class SiteTreeExtension extends DataExtension
     {
         $obj = $this->owner;
 
-        if($obj->DisableSidebar) {
+        if ($obj->DisableSidebar) {
             return false;
         }
 
@@ -58,17 +58,14 @@ class SiteTreeExtension extends DataExtension
         if (!$area) {
             return true;
         }
+
         $els = $area->Elements();
         if (!$els) {
             return true;
         }
-        $els = $els->find('ClassName', SidebarElement::class);
-        if (!$els) {
+        $sidebarEl = $els->find('ClassName', SidebarElement::class)?->first();
+        if ($sidebarEl) {
             return true;
-        }
-
-        if ($els->first()) {
-            return false;
         }
 
         if ($obj->SideBarContent) {
@@ -108,7 +105,7 @@ class SiteTreeExtension extends DataExtension
             return $this->_cached['summary' . $wordsToDisplay];
         }
 
-        if(!method_exists($obj, 'ElementalArea')) {
+        if (!method_exists($obj, 'ElementalArea')) {
             return;
         }
 
