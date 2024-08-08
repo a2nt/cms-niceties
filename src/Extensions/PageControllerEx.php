@@ -2,7 +2,10 @@
 
 namespace A2nt\CMSNiceties\Extensions;
 
+use A2nt\ElementalBasics\Models\TeamMember;
 use DNADesign\Elemental\Models\ElementalArea;
+use DNADesign\Elemental\Models\ElementContent;
+use DNADesign\ElementalUserForms\Control\ElementFormController;
 use Page;
 use SilverStripe\CMS\Model\SiteTree;
 use SilverStripe\Control\Controller;
@@ -153,7 +156,13 @@ class PageControllerEx extends Extension
             RequiredFields::create(['q'])
         )->setFormMethod('GET');
 
-        $form->setLegend('Search ' . $config->getField('Title') . ' Website');
+        $homePage = SiteTree::get()->filter('URLSegment', 'home')->first();
+        if ($homePage) {
+            $link = $homePage->Link();
+            $link = ($link === '/') ? '/home/' : $link;
+            $form->setFormAction($link);
+        }
+        $form->setLegend('Search at ' . $config->getField('Title'));
 
         return $form;
     }
