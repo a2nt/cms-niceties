@@ -164,6 +164,10 @@ class PageControllerEx extends Extension
         }
         $form->setLegend('Search at ' . $config->getField('Title'));
 
+        if (Page::config()->get('search_disable_security_token')) {
+            $form->disableSecurityToken();
+        }
+
         return $form;
     }
 
