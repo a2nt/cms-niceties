@@ -176,7 +176,10 @@ class PageControllerEx extends Extension
         $obj = $this->owner;
         $this->search_term = is_array($data) ? $data['q'] : $data;
 
-        return $obj->renderWith(['PageController_search', 'Page']);
+        return $obj->customise([
+            'Layout' => $obj->renderWith(['Layout/PageController_search']),
+            'isLegacy' => true,
+        ])->renderWith('Page');
     }
 
     public function SearchResults()
