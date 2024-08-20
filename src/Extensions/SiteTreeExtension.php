@@ -63,6 +63,7 @@ class SiteTreeExtension extends DataExtension
         if (!$els) {
             return true;
         }
+
         $sidebarEl = $els->find('ClassName', SidebarElement::class)?->first();
         if ($sidebarEl) {
             return true;
@@ -71,7 +72,8 @@ class SiteTreeExtension extends DataExtension
         if ($obj->SideBarContent) {
             return true;
         }
-        if (method_exists($obj, 'SideBarView')) {
+
+        if (is_callable([$obj,'SideBarView'], true)) {
             $view = $obj->SideBarView();
 
             if ($view && $view->Widgets()->count()) {
