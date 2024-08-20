@@ -39,7 +39,7 @@ class NotificationsExtension extends DataExtension
     {
         $tab = $fields->findOrMakeTab('Root.Notifications');
 
-        if(!$this->owner->exists()) {
+        if (!$this->owner->exists()) {
             $tab->push(LiteralField::create(
                 'NotificationsNotice',
                 '<p class="message notice">The object must be saved before notifications can be added</p>'
@@ -62,7 +62,7 @@ class NotificationsExtension extends DataExtension
         ]);
 
         $tab->setChildren(FieldList::create(
-            HeaderField::create('NotificationsHeader','Notifications'),
+            HeaderField::create('NotificationsHeader', 'Notifications'),
             LiteralField::create(
                 'CurrentNotifications',
                 '<b>Current:</b>'
@@ -83,9 +83,6 @@ class NotificationsExtension extends DataExtension
         $items = $this->owner->Notifications();
         $time = time();
 
-        return $items->filter([
-            'DateOn:LessThanOrEqual' => date('Y-m-d', $time),
-            'DateOff:GreaterThanOrEqual' => date('Y-m-d', $time),
-        ]);
+        return $items->where("AlwaysOn='1' OR (DateOn <= '".date('Y-m-d', $time)."' AND DateOff >= '".date('Y-m-d', $time)."')");
     }
 }

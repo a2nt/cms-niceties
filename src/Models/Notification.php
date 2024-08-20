@@ -36,6 +36,7 @@ class Notification extends DataObject
         'Content' => 'Text',
         'DateOn' => 'Date',
         'DateOff' => 'Date',
+        'AlwaysOn' => 'Boolean(0)',
         'Area' => 'Enum("Site","Site")',
     ];
 
@@ -52,6 +53,7 @@ class Notification extends DataObject
     private static $summary_fields = [
         'Title' => 'Title',
         'Content' => 'Text',
+        'AlwaysOn' => 'Always On',
         'DateOn' => 'Turn on date',
         'DateOff' => 'Turn off date',
     ];
@@ -72,13 +74,6 @@ class Notification extends DataObject
     public function validate()
     {
         $result = parent::validate();
-
-        if (!$this->getField('DateOn') || !$this->getField('DateOff')) {
-            return $result->addError(
-                'Turn on and turn off dates are required.',
-                ValidationResult::TYPE_ERROR
-            );
-        }
 
         if (!$this->getField('Content')) {
             return $result->addError(
